@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "knip": "knip",
+    "check:comments": "node scripts/check-comments.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
