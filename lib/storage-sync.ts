@@ -4,7 +4,6 @@ import { useEffect, useSyncExternalStore } from "react"
 
 import { useAuthStore } from "@/features/auth/store"
 import { useCarePlanStore } from "@/features/care-plan/store"
-import { useCompanionStore } from "@/features/companion/store"
 import { useFeedbackStore } from "@/features/feedback/store"
 import { usePatientStore } from "@/features/patient/store"
 
@@ -22,7 +21,6 @@ export const persistedStores: PersistedStore[] = [
   useCarePlanStore,
   usePatientStore,
   useFeedbackStore,
-  useCompanionStore,
 ]
 
 export function rehydrateStores(stores: PersistedStore[] = persistedStores): Promise<void[]> {

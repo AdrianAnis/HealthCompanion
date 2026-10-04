@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useAuthStore } from "@/features/auth/store"
 import { getActivePlan } from "@/features/care-plan/selectors"
 import { useCarePlanStore } from "@/features/care-plan/store"
-import { getTodayReminders } from "@/features/reminder/selectors"
 import { formatDateTime } from "@/lib/date"
 import { useStoresHydrated } from "@/lib/storage-sync"
 import { DEMO_PATIENT_ID } from "@/mocks/patients"
@@ -31,8 +30,6 @@ export function ActivePlanSummary() {
     )
   }
 
-  const reminders = getTodayReminders(active, new Date())
-
   return (
     <Card>
       <CardHeader>
@@ -47,7 +44,7 @@ export function ActivePlanSummary() {
       </CardHeader>
       <CardContent className="flex items-center gap-2 text-sm">
         <BellRing className="size-4 text-primary" />
-        {reminders.length} pengingat hari ini · {active.items.length} item rencana
+        {active.items.length} item dalam rencana perawatan Anda
       </CardContent>
     </Card>
   )
