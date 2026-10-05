@@ -1,4 +1,4 @@
-export type Gender = "male" | "female"
+type Gender = "male" | "female"
 
 export type Patient = {
   id: string
@@ -31,4 +31,5 @@ export type Doctor = {
   name: string
   specialty: string
   email: string
+  hospital: string
 }

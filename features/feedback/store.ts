@@ -2,41 +2,46 @@ import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 
 import type { FeedbackEntry, ReminderCompletion } from "@/features/feedback/types"
+import { mockCompletions, mockFeedbackEntries } from "@/mocks/activity"
 
-export const FEEDBACK_STORAGE_KEY = "hc-feedback"
+const FEEDBACK_STORAGE_KEY = "hc:feedback"
 
 type FeedbackState = {
   completions: Record<string, ReminderCompletion>
   entries: FeedbackEntry[]
   toggleCompletion: (key: string) => void
-  addEntry: (entry: Omit<FeedbackEntry, "id" | "createdAt">) => void
-  reset: () => void
+  addFeedback: (input: Pick<FeedbackEntry, "patientId" | "category" | "message">) => void
+  resolveFeedback: (feedbackId: string) => void
+  resetDemo: () => void
 }
 
 export const useFeedbackStore = create<FeedbackState>()(
   persist(
     (set) => ({
-      completions: {},
-      entries: [],
+      completions: mockCompletions,
+      entries: mockFeedbackEntries,
       toggleCompletion: (key) =>
         set((state) => {
-          const completions = { ...state.completions }
-          if (completions[key]) delete completions[key]
-          else completions[key] = { key, completedAt: new Date().toISOString() }
-          return { completions }
+          const { [key]: existing, ...rest } = state.completions
+          if (existing) return { completions: rest }
+          return { completions: { ...rest, [key]: { key, completedAt: new Date().toISOString() } } }
         }),
-      addEntry: (entry) =>
+      addFeedback: (input) =>
         set((state) => ({
           entries: [
             ...state.entries,
-            { ...entry, id: `fb-${entry.patientId}-${Date.now()}`, createdAt: new Date().toISOString() },
+            { ...input, id: `fb-${input.patientId}-${Date.now()}`, status: "open", createdAt: new Date().toISOString() },
           ],
         })),
-      reset: () => set({ completions: {}, entries: [] }),
+      resolveFeedback: (feedbackId) =>
+        set((state) => ({
+          entries: state.entries.map((entry) => (entry.id === feedbackId ? { ...entry, status: "resolved" } : entry)),
+        })),
+      resetDemo: () => set({ completions: mockCompletions, entries: mockFeedbackEntries }),
     }),
     {
       name: FEEDBACK_STORAGE_KEY,
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ completions: state.completions, entries: state.entries }),
       skipHydration: true,

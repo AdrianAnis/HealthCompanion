@@ -50,6 +50,16 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-float: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 :root {
@@ -131,7 +141,7 @@
 }
 
 .theme-patient {
-  --background: oklch(0.985 0.01 250);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.2 0.03 250);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.2 0.03 250);
@@ -169,12 +179,40 @@
   --sidebar-ring: oklch(0.7 0.13 255);
 }
 
+@utility type-display {
+  @apply text-4xl leading-tight font-semibold tracking-tight text-foreground md:text-5xl;
+}
+
+@utility type-title {
+  @apply text-2xl leading-tight font-semibold tracking-tight text-foreground md:text-3xl;
+}
+
+@utility type-heading {
+  @apply text-xl leading-snug font-semibold text-foreground;
+}
+
+@utility type-subheading {
+  @apply text-lg leading-snug font-semibold text-foreground;
+}
+
+@utility type-body {
+  @apply text-base leading-relaxed font-normal text-foreground;
+}
+
+@utility type-caption {
+  @apply text-sm leading-normal font-normal text-muted-foreground;
+}
+
+@utility type-overline {
+  @apply text-xs leading-none font-medium tracking-wider text-muted-foreground uppercase;
+}
+
 html:has(> body.theme-hospital) {
   font-size: 15px;
 }
 
 html:has(> body.theme-patient) {
-  font-size: 17px;
+  font-size: 16px;
 }
 
 @layer base {

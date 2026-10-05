@@ -1,10 +1,5 @@
-import { Sidebar } from "@/components/hospital/sidebar"
+import { HospitalShell } from "@/components/hospital/hospital-shell"
 
 export default function HospitalAppLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex min-h-dvh">
-      <Sidebar />
-      <main className="flex min-w-0 flex-1 flex-col">{children}</main>
-    </div>
-  )
+  return <HospitalShell>{children}</HospitalShell>
 }

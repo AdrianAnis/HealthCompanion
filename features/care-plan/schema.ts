@@ -27,7 +27,7 @@ export const activityItemSchema = z.object({
   id: z.string().min(1),
   kind: z.literal("activity"),
   activity: z.string().trim().min(1, "Aktivitas wajib diisi"),
-  frequencyPerWeek: z.number().int().positive(),
+  frequencyPerWeek: z.number().int().min(1, "Minimal 1x seminggu").max(7, "Maksimal 7x seminggu"),
   durationMinutes: z.number().int().positive("Durasi harus lebih dari 0"),
   instruction: z.string().trim(),
   aiSuggested: z.boolean(),
@@ -57,3 +57,10 @@ export const carePlanItemSchema = z.discriminatedUnion("kind", [
   restrictionItemSchema,
   followUpItemSchema,
 ])
+
+export const carePlanFormSchema = z.object({
+  sourceText: z.string().trim().min(1, "Instruksi dokter wajib diisi"),
+  items: z.array(carePlanItemSchema).min(1, "Care plan minimal berisi satu item"),
+})
+
+export type CarePlanFormValues = z.infer<typeof carePlanFormSchema>

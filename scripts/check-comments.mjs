@@ -1,28 +1,32 @@
-import { globSync } from "node:fs"
-import { readFileSync } from "node:fs"
+import { readdirSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 
-const patterns = ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}", "features/**/*.{ts,tsx}", "lib/**/*.{ts,tsx}", "mocks/**/*.{ts,tsx}"]
-const files = globSync(patterns, { ignore: ["components/ui/**", "node_modules/**"] })
+const ROOTS = ["app", "components", "features", "lib", "mocks"]
+const EXTENSIONS = [".ts", ".tsx"]
+const IGNORED_DIRECTORIES = ["components/ui"]
+const COMMENT_PATTERN = /^\s*(\/\/|\/\*|\*\s|\{\/\*)/
+const ALLOWED_DIRECTIVES = ["use client", "use server"]
 
-let hasError = false
-const commentRegex = /^\s*(\/\/|\/\*|\*\s|\{\/\*)/
-
-for (const file of files) {
-  const content = readFileSync(file, "utf-8")
-  const lines = content.split('\n')
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]
-    if (line.match(commentRegex) && !line.includes("use client") && !line.includes("use server") && !line.includes("eslint-disable")) {
-      console.error(`${file}:${i + 1}: Found comment: ${line.trim()}`)
-      hasError = true
-    }
-  }
+function listSourceFiles(directory) {
+  return readdirSync(directory, { recursive: true, withFileTypes: true })
+    .filter((entry) => entry.isFile() && EXTENSIONS.some((extension) => entry.name.endsWith(extension)))
+    .map((entry) => join(entry.parentPath, entry.name).replaceAll("\\", "/"))
+    .filter((file) => !IGNORED_DIRECTORIES.some((ignored) => file.startsWith(`${ignored}/`)))
 }
 
-if (hasError) {
-  console.error("Comments found in source code. Please remove them.")
+function findCommentLines(file) {
+  return readFileSync(file, "utf-8")
+    .split("\n")
+    .map((line, index) => ({ file, lineNumber: index + 1, text: line.trim() }))
+    .filter(({ text }) => COMMENT_PATTERN.test(text) && !ALLOWED_DIRECTIVES.some((directive) => text.includes(directive)))
+}
+
+const violations = ROOTS.flatMap(listSourceFiles).flatMap(findCommentLines)
+
+if (violations.length > 0) {
+  violations.forEach(({ file, lineNumber, text }) => console.error(`${file}:${lineNumber}: ${text}`))
+  console.error(`${violations.length} comment line(s) found.`)
   process.exit(1)
-} else {
-  console.log("No comments found.")
 }
+
+console.log("No comments found.")
