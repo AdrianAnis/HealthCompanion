@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronDown, HeartHandshake, LineChart, LogOut, RotateCcw, UserRound } from "lucide-react"
+import { ChevronDown, HeartHandshake, LogOut, UserRound } from "lucide-react"
 
 import { PATIENT_NAV_ITEMS } from "@/components/patient/nav-items"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -30,7 +30,7 @@ function getInitials(name: string): string {
 export function TopNav() {
   const pathname = usePathname()
   const { patient, activeDoctor } = usePatientContext()
-  const { logout, resetDemo } = usePatientActions()
+  const { logout } = usePatientActions()
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 hidden h-16 border-b bg-card/95 backdrop-blur md:block">
@@ -84,16 +84,6 @@ export function TopNav() {
                 <UserRound />
                 Lihat profil
               </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild className="min-h-11">
-              <Link href={routes.patient.activity}>
-                <LineChart />
-                Aktivitas
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="min-h-11" onSelect={resetDemo}>
-              <RotateCcw />
-              Reset demo
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem variant="destructive" className="min-h-11" onSelect={logout}>

@@ -101,7 +101,7 @@ export function OnboardingSteps() {
             <h1 key={step.title} className="mb-4 type-display duration-700 animate-in fade-in slide-in-from-right-8">
               {step.title}
             </h1>
-            <p className="mb-10 text-base leading-relaxed text-muted-foreground md:text-lg">{step.description}</p>
+            <p className="mb-10 text-base leading-relaxed text-muted-foreground">{step.description}</p>
 
             <div className="mx-auto flex w-full max-w-sm flex-col gap-3 md:mx-0">
               <Button size="lg" className="h-14 w-full rounded-full text-base font-semibold shadow-xl shadow-primary/25" onClick={handleNext}>

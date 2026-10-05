@@ -180,7 +180,7 @@
 }
 
 @utility type-display {
-  @apply text-3xl leading-tight font-semibold tracking-tight text-foreground md:text-5xl;
+  @apply text-4xl leading-tight font-semibold tracking-tight text-foreground md:text-5xl;
 }
 
 @utility type-title {
@@ -188,11 +188,11 @@
 }
 
 @utility type-heading {
-  @apply text-lg leading-snug font-semibold text-foreground;
+  @apply text-xl leading-snug font-semibold text-foreground;
 }
 
 @utility type-subheading {
-  @apply text-base leading-snug font-semibold text-foreground;
+  @apply text-lg leading-snug font-semibold text-foreground;
 }
 
 @utility type-body {
@@ -212,7 +212,7 @@ html:has(> body.theme-hospital) {
 }
 
 html:has(> body.theme-patient) {
-  font-size: 17px;
+  font-size: 16px;
 }
 
 @layer base {

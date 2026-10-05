@@ -114,7 +114,7 @@ export function AuthView() {
         </div>
         <div className="hidden md:block">
           <h1 className="mb-6 type-display text-primary-foreground">Mulai langkah sehat Anda hari ini.</h1>
-          <p className="max-w-md text-lg text-primary-foreground/80">
+          <p className="max-w-md text-base text-primary-foreground/80">
             Masuk untuk mengakses rencana perawatan yang disesuaikan khusus untuk Anda oleh dokter terpercaya.
           </p>
         </div>

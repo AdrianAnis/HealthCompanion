@@ -27,10 +27,7 @@ export function ActivitySection({ patientId, activePlan }: ActivitySectionProps)
 
   return (
     <section id="aktivitas" className="scroll-mt-24 space-y-4">
-      <header className="space-y-1">
-        <h2 className="type-heading">Aktivitas</h2>
-        <p className="type-caption">Jadwal yang kamu tandai selesai dan laporan kamu ke dokter.</p>
-      </header>
+      <p className="type-caption">Jadwal yang kamu tandai selesai dan laporan kamu ke dokter.</p>
 
       <div className="grid items-start gap-6 lg:grid-cols-2">
         <div className="rounded-3xl border bg-card p-6 shadow-sm">

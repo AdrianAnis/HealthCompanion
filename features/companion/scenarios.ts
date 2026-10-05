@@ -15,13 +15,17 @@ export type CompanionAnswer = {
 
 export const EMERGENCY_NUMBER = "119"
 
-export const SUGGESTED_QUESTIONS = [
-  "Sekarang harus minum obat apa?",
-  "Boleh makan ikan asin?",
-  "Jelaskan instruksi dokter ini",
-  "Dosis amlodipin saya berapa?",
-  "Kalau lupa minum obat gimana?",
-  "Dada saya nyeri, harus minum apa?",
+export type SuggestionCard = {
+  title: string
+  description: string
+  question: string
+}
+
+export const SUGGESTION_CARDS: SuggestionCard[] = [
+  { title: "Jadwal obat", description: "Obat apa yang perlu diminum hari ini", question: "Sekarang harus minum obat apa?" },
+  { title: "Pantangan makanan", description: "Cek makanan yang boleh dan tidak", question: "Boleh makan ikan asin?" },
+  { title: "Jelaskan instruksi", description: "Penjelasan sederhana dari dokter", question: "Jelaskan instruksi dokter ini" },
+  { title: "Dosis obat", description: "Dosis dan jam minum obat kamu", question: "Berapa dosis obat saya?" },
 ]
 
 const URGENT_MESSAGE =
