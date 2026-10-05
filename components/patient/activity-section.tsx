@@ -26,17 +26,17 @@ export function ActivitySection({ patientId, activePlan }: ActivitySectionProps)
   const feedback = selectPatientFeedback(entries, patientId)
 
   return (
-    <section id="aktivitas" className="scroll-mt-24 space-y-4">
+    <section id="aktivitas" className="scroll-mt-24 space-y-6">
       <p className="type-caption">Jadwal yang kamu tandai selesai dan laporan kamu ke dokter.</p>
 
-      <div className="grid items-start gap-6 lg:grid-cols-2">
-        <div className="rounded-3xl border bg-card p-6 shadow-sm">
+      <div className="space-y-8">
+        <div>
           <h3 className="type-subheading">7 hari terakhir</h3>
           <p className="mb-4 type-caption">Jumlah jadwal obat dan aktivitas yang kamu tandai selesai.</p>
           <AdherenceChart days={days} />
         </div>
 
-        <div id="lapor-keluhan" className="scroll-mt-24 rounded-3xl border bg-card p-6 shadow-sm">
+        <div id="lapor-keluhan" className="scroll-mt-24">
           <h3 className="mb-4 type-subheading">Lapor kendala atau keluhan</h3>
           <FeedbackForm onSubmit={(values) => addFeedback({ patientId, ...values })} />
         </div>
@@ -49,7 +49,7 @@ export function ActivitySection({ patientId, activePlan }: ActivitySectionProps)
         ) : (
           <ul className="space-y-3">
             {feedback.map((entry) => (
-              <li key={entry.id} className="rounded-3xl border bg-card p-4 shadow-sm">
+              <li key={entry.id} className="rounded-2xl border p-4">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="secondary">{FEEDBACK_CATEGORY_LABEL[entry.category]}</Badge>
                   <Badge variant="outline">{FEEDBACK_STATUS_LABEL[entry.status]}</Badge>

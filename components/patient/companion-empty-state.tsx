@@ -24,10 +24,10 @@ export function CompanionEmptyState({ firstName, isDisabled, onSelect }: Compani
               type="button"
               disabled={isDisabled}
               onClick={() => onSelect(card.question)}
-              className="flex h-full min-h-28 w-full flex-col gap-1 rounded-2xl border bg-card p-4 text-left transition-colors hover:bg-muted disabled:opacity-50"
+              className="flex h-full min-h-24 w-full flex-col gap-1.5 rounded-2xl border bg-card p-4 text-left transition-colors hover:bg-muted disabled:opacity-50"
             >
-              <span className="type-subheading">{card.title}</span>
-              <span className="type-caption">{card.description}</span>
+              <span className="text-sm font-semibold text-foreground">{card.title}</span>
+              <span className="text-xs leading-relaxed text-muted-foreground">{card.description}</span>
             </button>
           </li>
         ))}
