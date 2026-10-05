@@ -1,33 +1,62 @@
 import type { CarePlan, CarePlanItem, CarePlanItemKind, CarePlanItemOf } from "@/features/care-plan/types"
 
-export function getPatientPlans(plans: CarePlan[], patientId: string): CarePlan[] {
+export function selectPatientPlans(plans: CarePlan[], patientId: string): CarePlan[] {
   return plans.filter((plan) => plan.patientId === patientId)
 }
 
-export function getActivePlan(plans: CarePlan[], patientId: string): CarePlan | undefined {
+export function selectActivePlan(plans: CarePlan[], patientId: string): CarePlan | undefined {
   return plans.find((plan) => plan.patientId === patientId && plan.status === "active")
 }
 
-export function getPlanHistory(plans: CarePlan[], patientId: string): CarePlan[] {
-  return getPatientPlans(plans, patientId)
+export function selectDraftPlan(plans: CarePlan[], patientId: string): CarePlan | undefined {
+  return plans.find((plan) => plan.patientId === patientId && plan.status === "draft")
+}
+
+export function selectPlanHistory(plans: CarePlan[], patientId: string): CarePlan[] {
+  return selectPatientPlans(plans, patientId)
     .filter((plan) => plan.status !== "draft")
     .sort((a, b) => b.version - a.version)
 }
 
-export function getItemsByKind<K extends CarePlanItemKind>(
+export function selectItemsByKind<K extends CarePlanItemKind>(
   plan: CarePlan | undefined,
   kind: K,
 ): CarePlanItemOf<K>[] {
-  if (!plan) return []
-  return plan.items.filter((item): item is CarePlanItemOf<K> => item.kind === kind)
+  return plan?.items.filter((item): item is CarePlanItemOf<K> => item.kind === kind) ?? []
 }
 
-export function findPlanItem(plan: CarePlan | undefined, itemId: string): CarePlanItem | undefined {
+export function selectPlanItem(plan: CarePlan | undefined, itemId: string): CarePlanItem | undefined {
   return plan?.items.find((item) => item.id === itemId)
 }
 
-export function getNextFollowUp(plan: CarePlan | undefined, todayKey: string) {
-  return getItemsByKind(plan, "followUp")
+export function selectNextFollowUp(plan: CarePlan | undefined, todayKey: string): CarePlanItemOf<"followUp"> | undefined {
+  return selectItemsByKind(plan, "followUp")
     .filter((item) => item.date >= todayKey)
     .sort((a, b) => a.date.localeCompare(b.date))[0]
+}
+
+export function selectUnacknowledgedPlan(
+  activePlan: CarePlan | undefined,
+  acknowledgedPlanId: string | undefined,
+): CarePlan | undefined {
+  if (!activePlan || !acknowledgedPlanId || activePlan.id === acknowledgedPlanId) return undefined
+  return activePlan
+}
+
+export type PatientPlanStatus = "draft-pending" | "active" | "none"
+
+export function selectPatientPlanStatus(plans: CarePlan[], patientId: string): PatientPlanStatus {
+  if (selectDraftPlan(plans, patientId)) return "draft-pending"
+  return selectActivePlan(plans, patientId) ? "active" : "none"
+}
+
+export function selectDraftPlans(plans: CarePlan[]): CarePlan[] {
+  return plans.filter((plan) => plan.status === "draft")
+}
+
+export function selectRecentlyConfirmedPlans(plans: CarePlan[], limit: number): CarePlan[] {
+  return plans
+    .filter((plan): plan is CarePlan & { confirmedAt: string } => plan.confirmedAt !== null)
+    .sort((a, b) => b.confirmedAt.localeCompare(a.confirmedAt))
+    .slice(0, limit)
 }

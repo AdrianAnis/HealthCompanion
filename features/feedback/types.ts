@@ -3,16 +3,17 @@ export type ReminderCompletion = {
   completedAt: string
 }
 
-export type FeedbackKind = "symptom" | "side-effect" | "mood" | "note"
+export const FEEDBACK_CATEGORIES = ["side-effect", "symptom", "obstacle", "other"] as const
 
-export type FeedbackSeverity = "low" | "medium" | "high"
+export type FeedbackCategory = (typeof FEEDBACK_CATEGORIES)[number]
+
+export type FeedbackStatus = "open" | "resolved"
 
 export type FeedbackEntry = {
   id: string
   patientId: string
-  planId: string | null
-  kind: FeedbackKind
-  severity: FeedbackSeverity
+  category: FeedbackCategory
   message: string
+  status: FeedbackStatus
   createdAt: string
 }

@@ -1,15 +1,15 @@
 import type { Metadata } from "next"
-import { IBM_Plex_Sans } from "next/font/google"
+import { Poppins } from "next/font/google"
 
 import "../globals.css"
 
 import { StoreSync } from "@/components/store-sync"
 import { Toaster } from "@/components/ui/sonner"
 
-const plexSans = IBM_Plex_Sans({
+const poppins = Poppins({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 })
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function HospitalRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={plexSans.variable}>
+    <html lang="id" className={poppins.variable}>
       <body className="theme-hospital min-h-dvh">
         <StoreSync />
         {children}

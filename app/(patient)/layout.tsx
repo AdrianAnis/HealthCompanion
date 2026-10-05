@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next"
-import { Nunito } from "next/font/google"
+import { Poppins } from "next/font/google"
 
 import "../globals.css"
 
 import { StoreSync } from "@/components/store-sync"
 import { Toaster } from "@/components/ui/sonner"
 
-const nunito = Nunito({
+const poppins = Poppins({
   variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 })
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export const viewport: Viewport = {
 
 export default function PatientRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={nunito.variable}>
+    <html lang="id" className={poppins.variable}>
       <body className="theme-patient min-h-dvh">
         <StoreSync />
         {children}

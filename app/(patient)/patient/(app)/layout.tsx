@@ -1,5 +1,5 @@
-import { MobileShell } from "@/components/patient/mobile-shell"
+import { PatientShell } from "@/components/patient/patient-shell"
 
 export default function PatientAppLayout({ children }: { children: React.ReactNode }) {
-  return <MobileShell>{children}</MobileShell>
+  return <PatientShell>{children}</PatientShell>
 }

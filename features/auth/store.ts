@@ -1,71 +1,44 @@
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 
-import { DEMO_OTP, mockDoctors, mockPatients } from "@/mocks/patients"
+import { DEMO_PATIENT_ID, mockDoctors } from "@/mocks/patients"
 
-export const AUTH_STORAGE_KEY = "hc-auth"
+const AUTH_STORAGE_KEY = "hc:auth"
 
-export type Surface = "doctor" | "patient"
+type Surface = "doctor" | "patient"
 
-export type DoctorSession = {
-  doctorId: string
-  signedInAt: string
-}
-
-export type PatientSession = {
-  patientId: string
+type Session = {
+  userId: string
   signedInAt: string
 }
 
 type AuthState = {
-  doctor: DoctorSession | null
-  patient: PatientSession | null
-  pendingPhone: string | null
+  doctor: Session | null
+  patient: Session | null
   loginDoctor: (email: string) => boolean
-  requestOtp: (phone: string) => boolean
-  verifyOtp: (otp: string) => boolean
+  loginPatient: () => void
   logout: (surface: Surface) => void
-}
-
-function normalizePhone(phone: string): string {
-  return phone.replace(/\D/g, "").replace(/^62/, "0")
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       doctor: null,
       patient: null,
-      pendingPhone: null,
       loginDoctor: (email) => {
         const doctor = mockDoctors.find((item) => item.email.toLowerCase() === email.trim().toLowerCase())
         if (!doctor) return false
-        set({ doctor: { doctorId: doctor.id, signedInAt: new Date().toISOString() } })
+        set({ doctor: { userId: doctor.id, signedInAt: new Date().toISOString() } })
         return true
       },
-      requestOtp: (phone) => {
-        const normalized = normalizePhone(phone)
-        const exists = mockPatients.some((patient) => patient.phone === normalized)
-        set({ pendingPhone: exists ? normalized : null })
-        return exists
-      },
-      verifyOtp: (otp) => {
-        const phone = get().pendingPhone
-        const patient = mockPatients.find((item) => item.phone === phone)
-        if (!patient || otp !== DEMO_OTP) return false
-        set({
-          patient: { patientId: patient.id, signedInAt: new Date().toISOString() },
-          pendingPhone: null,
-        })
-        return true
-      },
-      logout: (surface) => set(surface === "doctor" ? { doctor: null } : { patient: null, pendingPhone: null }),
+      loginPatient: () => set({ patient: { userId: DEMO_PATIENT_ID, signedInAt: new Date().toISOString() } }),
+      logout: (surface) => set(surface === "doctor" ? { doctor: null } : { patient: null }),
     }),
     {
       name: AUTH_STORAGE_KEY,
-      version: 1,
+      version: 3,
       storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({ doctor: state.doctor, patient: state.patient, pendingPhone: state.pendingPhone }),
+      partialize: (state) => ({ doctor: state.doctor, patient: state.patient }),
       skipHydration: true,
     },
   ),
