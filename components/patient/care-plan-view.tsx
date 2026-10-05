@@ -1,12 +1,15 @@
 "use client"
 
+import { Suspense } from "react"
 import Link from "next/link"
 import { ChevronRight, ClipboardX } from "lucide-react"
 
 import { CARE_PLAN_KIND_ICON } from "@/components/patient/care-plan-kind-icons"
+import { CarePlanItemDialog } from "@/components/patient/care-plan-item-dialog"
 import { EmptyState } from "@/components/patient/empty-state"
 import { PageSkeleton } from "@/components/patient/page-skeleton"
 import { PlanUpdateBanner } from "@/components/patient/plan-update-banner"
+import { RingOrnament } from "@/components/patient/ring-ornament"
 import { Badge } from "@/components/ui/badge"
 import { getItemSummary, getItemTitle } from "@/features/care-plan/describe"
 import { CARE_PLAN_ITEM_KIND_LABEL, CARE_PLAN_KIND_ORDER } from "@/features/care-plan/labels"
@@ -14,9 +17,7 @@ import { selectItemsByKind } from "@/features/care-plan/selectors"
 import { usePatientContext } from "@/features/patient/use-patient-context"
 import { formatDateTime } from "@/lib/date"
 import { routes } from "@/lib/routes"
-import { cn } from "@/lib/utils"
 
-const RING_SIZES = ["size-48", "size-72", "size-96", "size-128"]
 
 export function CarePlanView() {
   const { isHydrated, patient, activePlan, activeDoctor } = usePatientContext()
@@ -43,14 +44,7 @@ export function CarePlanView() {
       <PlanUpdateBanner />
 
       <section className="relative grid gap-5 overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground sm:grid-cols-3 md:p-8">
-        <div className="pointer-events-none absolute -right-6 -bottom-10" aria-hidden="true">
-          {RING_SIZES.map((size) => (
-            <span
-              key={size}
-              className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-foreground/10", size)}
-            />
-          ))}
-        </div>
+        <RingOrnament />
         <PlanFact label="Dokter">
           <p className="font-medium">{activeDoctor?.name ?? "-"}</p>
           {activeDoctor ? <p className="text-sm text-primary-foreground/80">{activeDoctor.hospital}</p> : null}
@@ -100,6 +94,9 @@ export function CarePlanView() {
           )
         })}
       </div>
+      <Suspense fallback={null}>
+        <CarePlanItemDialog />
+      </Suspense>
     </div>
   )
 }

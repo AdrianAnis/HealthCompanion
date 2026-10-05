@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation"
 import { ChevronDown, HeartHandshake, LogOut, UserRound } from "lucide-react"
 
 import { PATIENT_NAV_ITEMS } from "@/components/patient/nav-items"
+import { RingOrnament } from "@/components/patient/ring-ornament"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { usePatientActions } from "@/features/patient/use-patient-actions"
@@ -72,24 +72,38 @@ export function TopNav() {
             </Avatar>
             <ChevronDown className="size-4 text-muted-foreground" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-64">
-            <DropdownMenuLabel className="space-y-0.5">
-              <p className="text-sm font-medium text-foreground">{patient?.name}</p>
-              <p className="text-xs font-normal text-muted-foreground">{patient?.mrn}</p>
-              {activeDoctor ? <p className="text-xs font-normal text-muted-foreground">{activeDoctor.hospital}</p> : null}
+          <DropdownMenuContent align="end" sideOffset={10} className="w-72 overflow-hidden rounded-2xl p-0">
+            <DropdownMenuLabel className="relative overflow-hidden bg-primary p-5 text-primary-foreground">
+              <RingOrnament />
+              <div className="relative flex items-center gap-3">
+                <Avatar className="size-12">
+                  <AvatarFallback className="bg-primary-foreground/20 font-semibold text-primary-foreground">
+                    {patient ? getInitials(patient.name) : ""}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="min-w-0">
+                  <p className="truncate text-base font-semibold">{patient?.name}</p>
+                  <p className="text-sm font-normal text-primary-foreground/80">{patient?.mrn}</p>
+                </div>
+              </div>
+              {activeDoctor ? <p className="relative mt-3 text-xs font-normal text-primary-foreground/80">{activeDoctor.hospital}</p> : null}
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className="min-h-11">
-              <Link href={routes.patient.profile}>
-                <UserRound />
-                Lihat profil
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive" className="min-h-11" onSelect={logout}>
-              <LogOut />
-              Keluar
-            </DropdownMenuItem>
+            <div className="space-y-1 p-2">
+              <DropdownMenuItem asChild className="min-h-12 gap-3 rounded-xl px-2 text-sm font-medium">
+                <Link href={routes.patient.profile}>
+                  <span className="flex size-8 items-center justify-center rounded-lg bg-muted">
+                    <UserRound className="size-4" />
+                  </span>
+                  Lihat profil
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem variant="destructive" className="min-h-12 gap-3 rounded-xl px-2 text-sm font-medium" onSelect={logout}>
+                <span className="flex size-8 items-center justify-center rounded-lg bg-destructive/10">
+                  <LogOut className="size-4" />
+                </span>
+                Keluar
+              </DropdownMenuItem>
+            </div>
           </DropdownMenuContent>
         </DropdownMenu>
       </nav>

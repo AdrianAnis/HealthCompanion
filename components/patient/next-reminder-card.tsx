@@ -1,10 +1,8 @@
-import Link from "next/link"
 import { CheckCircle2, Clock } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
+import { RingOrnament } from "@/components/patient/ring-ornament"
 import { Button } from "@/components/ui/button"
 import type { ReminderView } from "@/features/reminder/selectors"
-import { routes } from "@/lib/routes"
 
 type NextReminderCardProps = {
   reminder: ReminderView | undefined
@@ -34,25 +32,27 @@ export function NextReminderCard({ reminder, total, onToggle }: NextReminderCard
   const isOverdue = reminder.status === "overdue"
 
   return (
-    <section className="rounded-3xl border bg-card p-6 shadow-sm md:p-8">
-      <div className="flex flex-wrap items-center gap-2">
-        <Badge variant={isOverdue ? "destructive" : "default"}>{isOverdue ? "Terlewat" : "Berikutnya"}</Badge>
-        <span className="flex items-center gap-1 text-sm font-medium text-muted-foreground">
+    <section className="relative overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground md:p-8">
+      <RingOrnament />
+      <div className="relative flex flex-wrap items-center gap-3 text-sm font-medium">
+        <span className="rounded-full bg-primary-foreground px-3 py-0.5 text-xs font-semibold text-primary">
+          {isOverdue ? "Terlewat" : "Berikutnya"}
+        </span>
+        <span className="flex items-center gap-1 text-primary-foreground/80">
           <Clock className="size-4" />
           {reminder.time ?? "Kapan saja hari ini"}
         </span>
       </div>
-      <h2 className="mt-3 type-title">{reminder.title}</h2>
-      <p className="mt-1 text-muted-foreground">{reminder.detail}</p>
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <Button size="lg" className="h-12 flex-1 text-base" onClick={() => onToggle(reminder.key)}>
-          <CheckCircle2 />
-          Tandai selesai
-        </Button>
-        <Button asChild size="lg" variant="outline" className="h-12 text-base">
-          <Link href={routes.patient.carePlanItem(reminder.itemId)}>Lihat detail</Link>
-        </Button>
-      </div>
+      <h2 className="relative mt-3 type-title text-primary-foreground">{reminder.title}</h2>
+      <p className="relative mt-1 text-primary-foreground/80">{reminder.detail}</p>
+      <Button
+        size="lg"
+        className="relative mt-6 h-12 w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 sm:w-auto sm:min-w-56"
+        onClick={() => onToggle(reminder.key)}
+      >
+        <CheckCircle2 />
+        Tandai selesai
+      </Button>
     </section>
   )
 }

@@ -7,7 +7,7 @@ export function ReportPromptLink() {
   return (
     <Link
       href={routes.patient.report}
-      className="flex min-h-14 items-center gap-3 rounded-2xl border bg-card px-4 py-3 transition-colors hover:bg-muted"
+      className="flex min-h-20 items-center gap-4 rounded-2xl border bg-card px-5 py-5 transition-colors hover:bg-muted"
     >
       <MessageSquareWarning className="size-5 text-primary" />
       <span className="flex-1">

@@ -1,9 +1,11 @@
 "use client"
 
+import { Suspense } from "react"
 import { ClipboardX } from "lucide-react"
 
 import { CompanionPromptCard } from "@/components/patient/companion-prompt-card"
 import { DietGuideCard } from "@/components/patient/diet-guide-card"
+import { CarePlanItemDialog } from "@/components/patient/care-plan-item-dialog"
 import { EmptyState } from "@/components/patient/empty-state"
 import { FollowUpCard } from "@/components/patient/follow-up-card"
 import { NextReminderCard } from "@/components/patient/next-reminder-card"
@@ -57,9 +59,9 @@ export function TodayView() {
           </div>
           <aside className="min-w-0 space-y-6 lg:col-span-5 xl:col-span-4">
             <CompanionPromptCard />
-            <ReportPromptLink />
             <DietGuideCard items={selectItemsByKind(activePlan, "diet")} />
-            <FollowUpCard followUp={selectNextFollowUp(activePlan, toDateKey(now))} doctor={activeDoctor} />
+            <FollowUpCard followUp={selectNextFollowUp(activePlan, toDateKey(now))} doctor={activeDoctor} now={now} />
+            <ReportPromptLink />
           </aside>
         </div>
       ) : (
@@ -69,6 +71,9 @@ export function TodayView() {
           description="Jadwal obat dan aktivitas akan muncul di sini setelah dokter mengonfirmasi care plan kamu."
         />
       )}
+      <Suspense fallback={null}>
+        <CarePlanItemDialog />
+      </Suspense>
     </div>
   )
 }

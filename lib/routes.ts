@@ -1,3 +1,5 @@
+export const ITEM_QUERY_KEY = "item"
+
 export const routes = {
   home: "/",
   hospital: {
@@ -15,7 +17,7 @@ export const routes = {
     login: "/patient/login",
     today: "/patient/today",
     carePlan: "/patient/care-plan",
-    carePlanItem: (itemId: string) => `/patient/care-plan/${itemId}`,
+    carePlanItem: (itemId: string) => `?${ITEM_QUERY_KEY}=${itemId}`,
     companion: "/patient/companion",
     report: "/patient/profile?tab=aktivitas#lapor-keluhan",
     profile: "/patient/profile",
