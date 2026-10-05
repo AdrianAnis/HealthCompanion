@@ -12,7 +12,7 @@ export function EmptyState({ icon: Icon, title, description }: EmptyStateProps) 
       <span className="flex size-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
         <Icon className="size-7" />
       </span>
-      <h2 className="mt-4 text-lg font-bold">{title}</h2>
+      <h2 className="mt-4 type-heading">{title}</h2>
       <p className="mt-1 max-w-sm text-muted-foreground">{description}</p>
     </div>
   )

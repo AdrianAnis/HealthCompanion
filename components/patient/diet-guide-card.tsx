@@ -23,7 +23,7 @@ export function DietGuideCard({ items }: DietGuideCardProps) {
         <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
           <Salad className="size-5" />
         </span>
-        <h2 className="font-bold">Panduan makanan</h2>
+        <h2 className="type-subheading">Panduan makanan</h2>
       </div>
       {items.length === 0 ? (
         <p className="mt-4 text-muted-foreground">Dokter belum menetapkan anjuran makanan.</p>

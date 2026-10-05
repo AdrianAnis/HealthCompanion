@@ -47,11 +47,11 @@ export function ReminderTimeline({ reminders, onToggle }: ReminderTimelineProps)
               {isDone ? <Check className="size-5" /> : reminder.status === "overdue" ? <CircleAlert className="size-5" /> : <KindIcon className="size-5" />}
             </span>
             <Link href={routes.patient.carePlanItem(reminder.itemId)} className="min-w-0 flex-1">
-              <p className="text-xs font-bold text-muted-foreground">
+              <p className="text-xs font-medium text-muted-foreground">
                 {reminder.time ?? "Hari ini"} · {STATUS_LABEL[reminder.status]}
               </p>
-              <p className={cn("truncate font-bold", isDone && "text-muted-foreground line-through")}>{reminder.title}</p>
-              <p className="truncate text-sm text-muted-foreground">{reminder.detail}</p>
+              <p className={cn("truncate font-medium", isDone && "text-muted-foreground line-through")}>{reminder.title}</p>
+              <p className="truncate type-caption">{reminder.detail}</p>
             </Link>
             <Button variant={isDone ? "ghost" : "outline"} onClick={() => onToggle(reminder.key)}>
               {isDone ? "Batalkan" : "Selesai"}

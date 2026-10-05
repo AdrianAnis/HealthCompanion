@@ -65,8 +65,8 @@ export function CompanionView() {
           <MessageCircleHeart className="size-6" />
         </span>
         <div>
-          <h1 className="text-2xl font-extrabold tracking-tight">Companion</h1>
-          <p className="text-sm text-muted-foreground">Menjawab berdasarkan care plan aktif dari dokter kamu</p>
+          <h1 className="type-title">Companion</h1>
+          <p className="type-caption">Menjawab berdasarkan care plan aktif dari dokter kamu</p>
         </div>
       </header>
 
@@ -84,7 +84,7 @@ export function CompanionView() {
             <div className="flex justify-end">
               <div className="max-w-xs sm:max-w-md rounded-2xl rounded-br-md bg-primary px-4 py-3 text-primary-foreground">{pendingQuestion}</div>
             </div>
-            <p className="text-sm text-muted-foreground">Companion sedang mengetik...</p>
+            <p className="type-caption">Companion sedang mengetik...</p>
           </>
         ) : null}
         <div ref={bottomRef} />

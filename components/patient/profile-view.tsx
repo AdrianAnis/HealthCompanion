@@ -2,6 +2,7 @@
 
 import { LogOut, RotateCcw } from "lucide-react"
 
+import { ActivitySection } from "@/components/patient/activity-section"
 import { PageSkeleton } from "@/components/patient/page-skeleton"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -16,7 +17,7 @@ import { formatDate } from "@/lib/date"
 import { useNow } from "@/lib/use-now"
 
 export function ProfileView() {
-  const { isHydrated, patient } = usePatientContext()
+  const { isHydrated, patient, activePlan } = usePatientContext()
   const doctors = usePatientStore((state) => state.doctors)
   const plans = useCarePlanStore((state) => state.plans)
   const { logout, resetDemo } = usePatientActions()
@@ -28,14 +29,14 @@ export function ProfileView() {
   const planHistory = selectPlanHistory(plans, patient.id)
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <div className="mx-auto max-w-5xl space-y-8">
       <header className="space-y-1">
-        <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">Profil</h1>
-        <p className="text-muted-foreground">Data dasar dan rumah sakit yang terhubung.</p>
+        <h1 className="type-title">Profil</h1>
+        <p className="type-caption">Data dasar, aktivitas, dan rumah sakit yang terhubung.</p>
       </header>
 
       <section className="rounded-3xl border bg-card p-6 shadow-sm">
-        <h2 className="text-xl font-bold">{patient.name}</h2>
+        <h2 className="type-heading">{patient.name}</h2>
         <dl className="mt-4 grid gap-4 sm:grid-cols-2">
           <ProfileFact label="Usia" value={`${selectPatientAge(patient, now)} tahun`} />
           <ProfileFact label="Nomor rekam medis" value={patient.mrn} />
@@ -46,14 +47,16 @@ export function ProfileView() {
         </dl>
       </section>
 
+      <ActivitySection patientId={patient.id} activePlan={activePlan} />
+
       <section className="rounded-3xl border bg-card p-6 shadow-sm">
-        <h2 className="font-bold">Riwayat versi care plan</h2>
+        <h2 className="type-subheading">Riwayat versi care plan</h2>
         <ul className="mt-4 divide-y">
           {planHistory.map((plan) => (
             <li key={plan.id} className="flex items-center justify-between gap-3 py-3">
               <div>
-                <p className="font-semibold">Versi {plan.version}</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="font-medium">Versi {plan.version}</p>
+                <p className="type-caption">
                   {plan.confirmedAt ? `Dikonfirmasi ${formatDate(plan.confirmedAt)}` : "Belum dikonfirmasi"}
                 </p>
               </div>
@@ -85,8 +88,8 @@ type ProfileFactProps = {
 function ProfileFact({ label, value }: ProfileFactProps) {
   return (
     <div>
-      <dt className="text-xs font-bold tracking-wide text-muted-foreground uppercase">{label}</dt>
-      <dd className="mt-1 font-semibold">{value}</dd>
+      <dt className="type-overline">{label}</dt>
+      <dd className="mt-1 font-medium">{value}</dd>
     </div>
   )
 }

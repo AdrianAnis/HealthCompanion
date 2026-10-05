@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/patient/empty-state"
 import { FollowUpCard } from "@/components/patient/follow-up-card"
 import { NextReminderCard } from "@/components/patient/next-reminder-card"
 import { PageSkeleton } from "@/components/patient/page-skeleton"
+import { ReportPromptLink } from "@/components/patient/report-prompt-link"
 import { PlanUpdateBanner } from "@/components/patient/plan-update-banner"
 import { ReminderTimeline } from "@/components/patient/reminder-timeline"
 import { TodayHeader } from "@/components/patient/today-header"
@@ -50,12 +51,13 @@ export function TodayView() {
           <div className="min-w-0 space-y-6 lg:col-span-7 xl:col-span-8">
             <NextReminderCard reminder={selectNextReminder(reminders)} total={reminders.length} onToggle={toggleCompletion} />
             <section className="space-y-3">
-              <h2 className="text-xl font-bold">Jadwal hari ini</h2>
+              <h2 className="type-heading">Jadwal hari ini</h2>
               <ReminderTimeline reminders={reminders} onToggle={toggleCompletion} />
             </section>
           </div>
           <aside className="min-w-0 space-y-6 lg:col-span-5 xl:col-span-4">
             <CompanionPromptCard />
+            <ReportPromptLink />
             <DietGuideCard items={selectItemsByKind(activePlan, "diet")} />
             <FollowUpCard followUp={selectNextFollowUp(activePlan, toDateKey(now))} doctor={activeDoctor} />
           </aside>

@@ -73,7 +73,7 @@ export function OnboardingSteps() {
     <div className="flex min-h-dvh flex-col bg-card">
       <header className="border-b bg-card/90 px-6 py-4 backdrop-blur md:px-12">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <span className="flex items-center gap-2 text-xl font-bold tracking-tight text-primary">
+          <span className="flex items-center gap-2 type-heading tracking-tight text-primary">
             <HeartHandshake className="size-6" />
             Health Companion
           </span>
@@ -98,13 +98,13 @@ export function OnboardingSteps() {
           </div>
 
           <div className="flex w-full max-w-md flex-1 flex-col text-center md:text-left">
-            <h1 key={step.title} className="mb-4 text-3xl leading-tight font-extrabold tracking-tight duration-700 animate-in fade-in slide-in-from-right-8 md:text-5xl">
+            <h1 key={step.title} className="mb-4 type-display duration-700 animate-in fade-in slide-in-from-right-8">
               {step.title}
             </h1>
             <p className="mb-10 text-base leading-relaxed text-muted-foreground md:text-lg">{step.description}</p>
 
             <div className="mx-auto flex w-full max-w-sm flex-col gap-3 md:mx-0">
-              <Button size="lg" className="h-14 w-full rounded-full text-base font-bold shadow-xl shadow-primary/25" onClick={handleNext}>
+              <Button size="lg" className="h-14 w-full rounded-full text-base font-semibold shadow-xl shadow-primary/25" onClick={handleNext}>
                 {stepIndex === LAST_STEP_INDEX ? "Mulai" : "Lanjut"}
               </Button>
               <Button variant="ghost" size="lg" className={cn("h-12 w-full rounded-full text-muted-foreground", stepIndex === 0 && "invisible")} onClick={handleBack}>

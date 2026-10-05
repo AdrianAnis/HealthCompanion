@@ -12,8 +12,8 @@ export function CompanionPromptCard() {
           <MessageCircleHeart className="size-5" />
         </span>
         <div>
-          <h2 className="font-bold">Tanya Companion</h2>
-          <p className="text-sm text-muted-foreground">Penjelasan mudah dari care plan kamu</p>
+          <h2 className="type-subheading">Tanya Companion</h2>
+          <p className="type-caption">Penjelasan mudah dari care plan kamu</p>
         </div>
       </div>
       <Button asChild className="mt-4 h-11 w-full text-base">

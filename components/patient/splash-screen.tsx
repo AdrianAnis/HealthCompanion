@@ -7,7 +7,7 @@ export function SplashScreen() {
         <HeartHandshake className="size-12" />
       </span>
       <div className="animate-in text-center delay-300 duration-700 fade-in slide-in-from-bottom-4">
-        <h1 className="text-3xl font-extrabold tracking-tight">Health Companion</h1>
+        <h1 className="type-title">Health Companion</h1>
         <p className="mt-1 text-primary-foreground/80">Teman pemulihanmu setiap hari</p>
       </div>
     </div>

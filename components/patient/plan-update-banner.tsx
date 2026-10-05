@@ -19,7 +19,7 @@ export function PlanUpdateBanner() {
     >
       <Info className="mt-0.5 size-5 shrink-0" />
       <div className="min-w-0 flex-1">
-        <p className="font-bold">Care plan kamu diperbarui oleh {doctorName ?? "dokter"}</p>
+        <p className="font-medium">Care plan kamu diperbarui oleh {doctorName ?? "dokter"}</p>
         <p className="text-sm">Sekarang kamu memakai versi {updatedPlan.version}. Jadwal hari ini sudah menyesuaikan.</p>
         <Button asChild variant="link" className="mt-1 h-auto p-0 text-warning-foreground underline">
           <Link href={routes.patient.carePlan} onClick={acknowledge}>

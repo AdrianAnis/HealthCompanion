@@ -19,7 +19,7 @@ export function NextReminderCard({ reminder, total, onToggle }: NextReminderCard
         <span className="flex size-12 items-center justify-center rounded-2xl bg-success/10 text-success">
           <CheckCircle2 className="size-6" />
         </span>
-        <h2 className="mt-4 text-xl font-bold">
+        <h2 className="mt-4 type-heading">
           {total === 0 ? "Tidak ada jadwal hari ini" : "Semua jadwal hari ini sudah kamu tandai"}
         </h2>
         <p className="mt-1 text-muted-foreground">
@@ -37,12 +37,12 @@ export function NextReminderCard({ reminder, total, onToggle }: NextReminderCard
     <section className="rounded-3xl border bg-card p-6 shadow-sm md:p-8">
       <div className="flex flex-wrap items-center gap-2">
         <Badge variant={isOverdue ? "destructive" : "default"}>{isOverdue ? "Terlewat" : "Berikutnya"}</Badge>
-        <span className="flex items-center gap-1 text-sm font-semibold text-muted-foreground">
+        <span className="flex items-center gap-1 text-sm font-medium text-muted-foreground">
           <Clock className="size-4" />
           {reminder.time ?? "Kapan saja hari ini"}
         </span>
       </div>
-      <h2 className="mt-3 text-2xl font-bold md:text-3xl">{reminder.title}</h2>
+      <h2 className="mt-3 type-title">{reminder.title}</h2>
       <p className="mt-1 text-muted-foreground">{reminder.detail}</p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         <Button size="lg" className="h-12 flex-1 text-base" onClick={() => onToggle(reminder.key)}>

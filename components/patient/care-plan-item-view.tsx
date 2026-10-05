@@ -41,20 +41,20 @@ export function CarePlanItemView({ itemId }: CarePlanItemViewProps) {
         <>
           <header className="space-y-2">
             <Badge variant="secondary">{CARE_PLAN_ITEM_KIND_LABEL[item.kind]}</Badge>
-            <h1 className="text-3xl font-extrabold tracking-tight">{getItemTitle(item)}</h1>
+            <h1 className="type-title">{getItemTitle(item)}</h1>
           </header>
 
           <dl className="divide-y rounded-3xl border bg-card px-6 shadow-sm">
             {getItemDetailRows(item).map((row) => (
               <div key={row.label} className="grid gap-1 py-4 sm:grid-cols-3">
-                <dt className="font-semibold text-muted-foreground">{row.label}</dt>
-                <dd className="font-semibold sm:col-span-2">{row.value}</dd>
+                <dt className="font-medium text-muted-foreground">{row.label}</dt>
+                <dd className="font-medium sm:col-span-2">{row.value}</dd>
               </div>
             ))}
           </dl>
 
           <section className="rounded-3xl border bg-card p-6 shadow-sm">
-            <h2 className="font-bold">Catatan asli dokter</h2>
+            <h2 className="type-subheading">Catatan asli dokter</h2>
             <p className="mt-2 text-muted-foreground">{activePlan.sourceText}</p>
           </section>
 

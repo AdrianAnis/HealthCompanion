@@ -16,14 +16,14 @@ export function FollowUpCard({ followUp, doctor }: FollowUpCardProps) {
         <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
           <CalendarCheck className="size-5" />
         </span>
-        <h2 className="font-bold">Kontrol berikutnya</h2>
+        <h2 className="type-subheading">Kontrol berikutnya</h2>
       </div>
       {followUp ? (
         <div className="mt-4 space-y-1">
-          <p className="text-lg font-extrabold">{formatDate(followUp.date, "EEEE, d MMMM yyyy")}</p>
+          <p className="type-heading">{formatDate(followUp.date, "EEEE, d MMMM yyyy")}</p>
           <p className="text-muted-foreground">{followUp.instruction}</p>
           {doctor ? (
-            <p className="pt-1 text-sm font-semibold">
+            <p className="pt-1 text-sm font-medium">
               {doctor.name} · {doctor.hospital}
             </p>
           ) : null}

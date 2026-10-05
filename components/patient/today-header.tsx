@@ -14,11 +14,11 @@ type TodayHeaderProps = {
 export function TodayHeader({ now, honorific, firstName, done, total }: TodayHeaderProps) {
   return (
     <header className="space-y-3">
-      <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-muted-foreground uppercase">
+      <p className="flex items-center gap-2 type-overline">
         <CalendarDays className="size-4" />
         {formatDate(now, "EEEE, d MMMM yyyy")}
       </p>
-      <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">
+      <h1 className="type-title">
         {getGreeting(now)}, {honorific} {firstName}
       </h1>
       {total > 0 ? (
@@ -28,7 +28,7 @@ export function TodayHeader({ now, honorific, firstName, done, total }: TodayHea
               <span key={index} className={cn("size-3 rounded-full", index < done ? "bg-success" : "bg-border")} />
             ))}
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="type-caption">
             <strong className="text-foreground">
               {done} dari {total} jadwal
             </strong>{" "}

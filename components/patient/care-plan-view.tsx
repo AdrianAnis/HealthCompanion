@@ -3,15 +3,20 @@
 import Link from "next/link"
 import { ChevronRight, ClipboardX } from "lucide-react"
 
+import { CARE_PLAN_KIND_ICON } from "@/components/patient/care-plan-kind-icons"
 import { EmptyState } from "@/components/patient/empty-state"
 import { PageSkeleton } from "@/components/patient/page-skeleton"
 import { PlanUpdateBanner } from "@/components/patient/plan-update-banner"
+import { Badge } from "@/components/ui/badge"
 import { getItemSummary, getItemTitle } from "@/features/care-plan/describe"
 import { CARE_PLAN_ITEM_KIND_LABEL, CARE_PLAN_KIND_ORDER } from "@/features/care-plan/labels"
 import { selectItemsByKind } from "@/features/care-plan/selectors"
 import { usePatientContext } from "@/features/patient/use-patient-context"
-import { formatDate, formatDateTime } from "@/lib/date"
+import { formatDateTime } from "@/lib/date"
 import { routes } from "@/lib/routes"
+import { cn } from "@/lib/utils"
+
+const RING_SIZES = ["size-48", "size-72", "size-96", "size-128"]
 
 export function CarePlanView() {
   const { isHydrated, patient, activePlan, activeDoctor } = usePatientContext()
@@ -29,37 +34,62 @@ export function CarePlanView() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <header className="space-y-1">
-        <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">Care plan saya</h1>
+        <h1 className="type-title">Care plan saya</h1>
         <p className="text-muted-foreground">Instruksi aktif dari dokter kamu, dikelompokkan per kategori.</p>
       </header>
+
       <PlanUpdateBanner />
 
-      <section className="grid gap-4 rounded-3xl border bg-card p-6 shadow-sm sm:grid-cols-2 lg:grid-cols-4">
-        <PlanFact label="Dokter" value={activeDoctor?.name ?? "-"} />
-        <PlanFact label="Versi" value={`Versi ${activePlan.version}`} />
-        <PlanFact label="Berlaku sejak" value={activePlan.confirmedAt ? formatDate(activePlan.confirmedAt) : "-"} />
-        <PlanFact label="Terakhir diperbarui" value={activePlan.confirmedAt ? formatDateTime(activePlan.confirmedAt) : "-"} />
+      <section className="relative grid gap-5 overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground sm:grid-cols-3 md:p-8">
+        <div className="pointer-events-none absolute -right-6 -bottom-10" aria-hidden="true">
+          {RING_SIZES.map((size) => (
+            <span
+              key={size}
+              className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-foreground/10", size)}
+            />
+          ))}
+        </div>
+        <PlanFact label="Dokter">
+          <p className="font-medium">{activeDoctor?.name ?? "-"}</p>
+          {activeDoctor ? <p className="text-sm text-primary-foreground/80">{activeDoctor.hospital}</p> : null}
+        </PlanFact>
+        <PlanFact label="Versi">
+          <div className="flex items-center gap-2">
+            <p className="font-medium">Versi {activePlan.version}</p>
+            <Badge className="bg-primary-foreground text-primary">Aktif</Badge>
+          </div>
+        </PlanFact>
+        <PlanFact label="Berlaku sejak">
+          <p className="font-medium">{activePlan.confirmedAt ? formatDateTime(activePlan.confirmedAt) : "-"}</p>
+        </PlanFact>
       </section>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="columns-1 gap-6 md:columns-2">
         {CARE_PLAN_KIND_ORDER.map((kind) => {
           const items = selectItemsByKind(activePlan, kind)
           if (items.length === 0) return null
+          const KindIcon = CARE_PLAN_KIND_ICON[kind]
           return (
-            <section key={kind} className="space-y-3">
-              <h2 className="text-lg font-bold">{CARE_PLAN_ITEM_KIND_LABEL[kind]}</h2>
-              <ul className="space-y-2">
+            <section key={kind} className="mb-6 break-inside-avoid overflow-hidden rounded-3xl border bg-card shadow-sm">
+              <h2 className="flex items-center gap-3 border-b bg-muted/40 px-5 py-4 type-heading">
+                <span className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <KindIcon className="size-5" />
+                </span>
+                {CARE_PLAN_ITEM_KIND_LABEL[kind]}
+                <span className="ml-auto rounded-full bg-background px-2.5 py-0.5 text-sm font-medium text-muted-foreground">{items.length}</span>
+              </h2>
+              <ul className="divide-y">
                 {items.map((item) => (
                   <li key={item.id}>
                     <Link
                       href={routes.patient.carePlanItem(item.id)}
-                      className="flex items-center gap-3 rounded-2xl border bg-card p-4 transition-colors hover:bg-muted"
+                      className="flex min-h-16 items-center gap-3 px-5 py-4 transition-colors hover:bg-muted/60"
                     >
                       <div className="min-w-0 flex-1">
-                        <p className="font-bold">{getItemTitle(item)}</p>
-                        <p className="text-sm text-muted-foreground">{getItemSummary(item)}</p>
+                        <p className="font-medium">{getItemTitle(item)}</p>
+                        <p className="type-caption">{getItemSummary(item)}</p>
                       </div>
                       <ChevronRight className="size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
                     </Link>
@@ -76,14 +106,14 @@ export function CarePlanView() {
 
 type PlanFactProps = {
   label: string
-  value: string
+  children: React.ReactNode
 }
 
-function PlanFact({ label, value }: PlanFactProps) {
+function PlanFact({ label, children }: PlanFactProps) {
   return (
-    <div>
-      <p className="text-xs font-bold tracking-wide text-muted-foreground uppercase">{label}</p>
-      <p className="mt-1 font-semibold">{value}</p>
+    <div className="relative space-y-1">
+      <p className="type-overline text-primary-foreground/70">{label}</p>
+      {children}
     </div>
   )
 }

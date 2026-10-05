@@ -22,7 +22,7 @@ import { routes } from "@/lib/routes"
 
 type AuthMode = "signup" | "signin"
 
-const SUBMIT_BUTTON_CLASS = "mt-4 h-14 w-full rounded-full text-lg font-bold shadow-xl shadow-primary/25"
+const SUBMIT_BUTTON_CLASS = "mt-4 h-14 w-full rounded-full type-heading shadow-xl shadow-primary/25"
 
 type SignUpFormProps = {
   onSubmit: () => void
@@ -108,12 +108,12 @@ export function AuthView() {
           <ChevronLeft className="mr-1 size-5" />
           Kembali
         </Link>
-        <div className="flex items-center text-2xl font-bold tracking-tight md:mb-8 md:text-3xl">
+        <div className="flex items-center text-2xl font-semibold tracking-tight md:mb-8 md:text-3xl">
           <Activity className="mr-2.5 size-8 md:size-10" />
           Health Companion
         </div>
         <div className="hidden md:block">
-          <h1 className="mb-6 text-4xl leading-tight font-extrabold tracking-tight lg:text-5xl">Mulai langkah sehat Anda hari ini.</h1>
+          <h1 className="mb-6 type-display text-primary-foreground">Mulai langkah sehat Anda hari ini.</h1>
           <p className="max-w-md text-lg text-primary-foreground/80">
             Masuk untuk mengakses rencana perawatan yang disesuaikan khusus untuk Anda oleh dokter terpercaya.
           </p>
@@ -123,7 +123,7 @@ export function AuthView() {
       <div className="relative -mt-10 flex w-full flex-1 flex-col justify-center rounded-t-[2rem] bg-card px-6 pt-8 pb-8 shadow-xl md:mt-0 md:w-1/2 md:rounded-none md:rounded-l-[3rem] md:px-12 lg:px-24">
         <div className="mx-auto w-full max-w-md">
           <div className="mb-6 text-center md:text-left">
-            <h2 className="mb-2 text-3xl font-extrabold">{isSignUp ? "Daftar sekarang" : "Selamat datang"}</h2>
+            <h2 className="mb-2 type-title">{isSignUp ? "Daftar sekarang" : "Selamat datang"}</h2>
             <p className="text-muted-foreground">
               {isSignUp ? "Daftar untuk mengatur dan mengembangkan rutinitas sehat bersama kami" : "Masuk untuk melanjutkan rencana perawatan Anda"}
             </p>
@@ -134,14 +134,14 @@ export function AuthView() {
           <div className="mt-6">
             <div className="relative mb-6 flex items-center justify-center">
               <span className="absolute inset-x-0 h-px bg-border" />
-              <span className="relative bg-card px-4 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+              <span className="relative bg-card px-4 text-xs font-medium tracking-wider text-muted-foreground uppercase">
                 Atau {isSignUp ? "daftar" : "masuk"} dengan
               </span>
             </div>
             <SocialLoginButtons onSelect={handleAuthenticated} />
-            <p className="mt-6 text-center text-sm text-muted-foreground">
+            <p className="mt-6 text-center type-caption">
               {isSignUp ? "Sudah punya akun? " : "Belum punya akun? "}
-              <button type="button" onClick={() => setMode(isSignUp ? "signin" : "signup")} className="min-h-11 font-bold text-primary hover:underline">
+              <button type="button" onClick={() => setMode(isSignUp ? "signin" : "signup")} className="min-h-11 font-semibold text-primary hover:underline">
                 {isSignUp ? "Masuk" : "Daftar"}
               </button>
             </p>

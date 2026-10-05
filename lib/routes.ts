@@ -17,7 +17,8 @@ export const routes = {
     carePlan: "/patient/care-plan",
     carePlanItem: (itemId: string) => `/patient/care-plan/${itemId}`,
     companion: "/patient/companion",
-    activity: "/patient/activity",
+    activity: "/patient/profile#aktivitas",
+    report: "/patient/profile#lapor-keluhan",
     profile: "/patient/profile",
   },
 } as const

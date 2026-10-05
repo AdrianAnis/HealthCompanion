@@ -33,7 +33,7 @@ export function FloatingField<TValues extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem className="relative mt-2 gap-1">
-          <FormLabel className="absolute -top-2.5 left-4 z-10 bg-card px-1.5 text-xs font-bold tracking-wide text-muted-foreground uppercase">
+          <FormLabel className="absolute -top-2.5 left-4 z-10 bg-card px-1.5 type-overline">
             {label}
           </FormLabel>
           <div className="relative">

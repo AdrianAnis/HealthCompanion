@@ -34,7 +34,7 @@ export function ChatBubble({ message, doctors, onReport }: ChatBubbleProps) {
       </div>
 
       {message.source ? (
-        <p className="flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+        <p className="flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
           <BookOpenCheck className="size-3.5" />
           Berdasarkan care plan v{message.source.version} · {getDoctorShortName(doctors, message.source.doctorId)} ·{" "}
           {formatDate(message.source.confirmedAt, "d MMM")}

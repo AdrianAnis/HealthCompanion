@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronDown, HeartHandshake, LogOut, RotateCcw, UserRound } from "lucide-react"
+import { ChevronDown, HeartHandshake, LineChart, LogOut, RotateCcw, UserRound } from "lucide-react"
 
 import { PATIENT_NAV_ITEMS } from "@/components/patient/nav-items"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -35,7 +35,7 @@ export function TopNav() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 hidden h-16 border-b bg-card/95 backdrop-blur md:block">
       <nav aria-label="Navigasi utama" className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-8">
-        <Link href={routes.patient.today} className="flex items-center gap-2 font-bold text-primary">
+        <Link href={routes.patient.today} className="flex items-center gap-2 font-semibold text-primary">
           <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <HeartHandshake className="size-5" />
           </span>
@@ -51,7 +51,7 @@ export function TopNav() {
                   href={href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative flex h-full items-center gap-2 px-4 text-sm font-semibold transition-colors",
+                    "relative flex h-full items-center gap-2 px-4 text-sm font-medium transition-colors",
                     isActive ? "text-primary" : "text-muted-foreground hover:text-foreground",
                   )}
                 >
@@ -66,15 +66,15 @@ export function TopNav() {
 
         <DropdownMenu>
           <DropdownMenuTrigger className="flex min-h-11 items-center gap-3 rounded-full py-1 pr-2 pl-3 outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring">
-            <span className="text-sm font-semibold">{patient?.name}</span>
+            <span className="text-sm font-medium">{patient?.name}</span>
             <Avatar>
-              <AvatarFallback className="bg-primary/10 font-bold text-primary">{patient ? getInitials(patient.name) : ""}</AvatarFallback>
+              <AvatarFallback className="bg-primary/10 font-semibold text-primary">{patient ? getInitials(patient.name) : ""}</AvatarFallback>
             </Avatar>
             <ChevronDown className="size-4 text-muted-foreground" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-64">
             <DropdownMenuLabel className="space-y-0.5">
-              <p className="text-sm font-bold text-foreground">{patient?.name}</p>
+              <p className="text-sm font-medium text-foreground">{patient?.name}</p>
               <p className="text-xs font-normal text-muted-foreground">{patient?.mrn}</p>
               {activeDoctor ? <p className="text-xs font-normal text-muted-foreground">{activeDoctor.hospital}</p> : null}
             </DropdownMenuLabel>
@@ -83,6 +83,12 @@ export function TopNav() {
               <Link href={routes.patient.profile}>
                 <UserRound />
                 Lihat profil
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className="min-h-11">
+              <Link href={routes.patient.activity}>
+                <LineChart />
+                Aktivitas
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="min-h-11" onSelect={resetDemo}>

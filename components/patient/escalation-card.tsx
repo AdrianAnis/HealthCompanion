@@ -32,7 +32,7 @@ export function EscalationCard({ scope }: EscalationCardProps) {
         isUrgent ? "border-destructive/40 bg-destructive/10" : "border-warning/40 bg-warning/15",
       )}
     >
-      <p className={cn("flex items-center gap-2 font-bold", isUrgent ? "text-destructive" : "text-warning-foreground")}>
+      <p className={cn("flex items-center gap-2 font-semibold", isUrgent ? "text-destructive" : "text-warning-foreground")}>
         {isUrgent ? <Phone className="size-5" /> : <Stethoscope className="size-5" />}
         {copy.title}
       </p>
