@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { ChevronDown, HeartHandshake, LogOut, UserRound } from "lucide-react"
 
 import { PATIENT_NAV_ITEMS } from "@/components/patient/nav-items"
-import { RingOrnament } from "@/components/patient/ring-ornament"
+import { RingOrnament } from "@/components/ring-ornament"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
   DropdownMenu,

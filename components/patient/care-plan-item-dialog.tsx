@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { MessageCircleHeart, X } from "lucide-react"
 
-import { RingOrnament } from "@/components/patient/ring-ornament"
+import { RingOrnament } from "@/components/ring-ornament"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import { getItemDetailRows, getItemSummary, getItemTitle } from "@/features/care-plan/describe"
