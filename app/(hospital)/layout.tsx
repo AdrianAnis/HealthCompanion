@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Poppins } from "next/font/google"
+import { Instrument_Serif, Poppins } from "next/font/google"
 
 import "../globals.css"
 
@@ -9,7 +9,14 @@ import { Toaster } from "@/components/ui/sonner"
 const poppins = Poppins({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600"],
+})
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-landing-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
 })
 
 export const metadata: Metadata = {
@@ -22,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function HospitalRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={poppins.variable}>
+    <html lang="id" className={`${poppins.variable} ${instrumentSerif.variable}`}>
       <body className="theme-hospital min-h-dvh">
         <StoreSync />
         {children}

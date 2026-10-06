@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Activity, ChevronLeft } from "lucide-react"
 import { useForm } from "react-hook-form"
 
-import { FloatingField } from "@/components/patient/floating-field"
+import { FloatingField } from "@/components/floating-field"
 import { SocialLoginButtons } from "@/components/patient/social-login-buttons"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"

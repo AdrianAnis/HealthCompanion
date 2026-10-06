@@ -3,7 +3,7 @@ import { z } from "zod"
 const timeSchema = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Format jam HH:mm")
 const dateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Format tanggal yyyy-MM-dd")
 
-export const medicationItemSchema = z.object({
+const medicationItemSchema = z.object({
   id: z.string().min(1),
   kind: z.literal("medication"),
   drug: z.string().trim().min(1, "Nama obat wajib diisi"),
@@ -14,7 +14,7 @@ export const medicationItemSchema = z.object({
   aiSuggested: z.boolean(),
 })
 
-export const dietItemSchema = z.object({
+const dietItemSchema = z.object({
   id: z.string().min(1),
   kind: z.literal("diet"),
   category: z.string().trim().min(1, "Kategori wajib diisi"),
@@ -23,7 +23,7 @@ export const dietItemSchema = z.object({
   aiSuggested: z.boolean(),
 })
 
-export const activityItemSchema = z.object({
+const activityItemSchema = z.object({
   id: z.string().min(1),
   kind: z.literal("activity"),
   activity: z.string().trim().min(1, "Aktivitas wajib diisi"),
@@ -33,7 +33,7 @@ export const activityItemSchema = z.object({
   aiSuggested: z.boolean(),
 })
 
-export const restrictionItemSchema = z.object({
+const restrictionItemSchema = z.object({
   id: z.string().min(1),
   kind: z.literal("restriction"),
   subject: z.string().trim().min(1, "Subjek wajib diisi"),
@@ -42,7 +42,7 @@ export const restrictionItemSchema = z.object({
   aiSuggested: z.boolean(),
 })
 
-export const followUpItemSchema = z.object({
+const followUpItemSchema = z.object({
   id: z.string().min(1),
   kind: z.literal("followUp"),
   date: dateSchema,
@@ -50,7 +50,7 @@ export const followUpItemSchema = z.object({
   aiSuggested: z.boolean(),
 })
 
-export const carePlanItemSchema = z.discriminatedUnion("kind", [
+const carePlanItemSchema = z.discriminatedUnion("kind", [
   medicationItemSchema,
   dietItemSchema,
   activityItemSchema,

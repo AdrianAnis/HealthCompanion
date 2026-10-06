@@ -1,6 +1,6 @@
 import { CheckCircle2, Clock } from "lucide-react"
 
-import { RingOrnament } from "@/components/patient/ring-ornament"
+import { RingOrnament } from "@/components/ring-ornament"
 import { Button } from "@/components/ui/button"
 import type { ReminderView } from "@/features/reminder/selectors"
 
