@@ -8,6 +8,7 @@ type BrandLogoProps = {
   size?: BrandLogoSize
   isInverted?: boolean
   hasName?: boolean
+  caption?: string
   className?: string
 }
 
@@ -29,7 +30,7 @@ const NAME_CLASS: Record<BrandLogoSize, string> = {
   lg: "text-3xl",
 }
 
-export function BrandLogo({ size = "md", isInverted = false, hasName = true, className }: BrandLogoProps) {
+export function BrandLogo({ size = "md", isInverted = false, hasName = true, caption, className }: BrandLogoProps) {
   return (
     <span className={cn("flex items-center gap-2.5 font-semibold", isInverted ? "text-primary-foreground" : "text-primary", className)}>
       <span
@@ -41,7 +42,12 @@ export function BrandLogo({ size = "md", isInverted = false, hasName = true, cla
       >
         <HeartHandshake className={ICON_CLASS[size]} />
       </span>
-      {hasName ? <span className={cn("tracking-tight", NAME_CLASS[size])}>SehatIn</span> : null}
+      {hasName ? (
+        <span className="flex flex-col leading-tight">
+          <span className={cn("tracking-tight", NAME_CLASS[size])}>SehatIn</span>
+          {caption ? <span className="text-xs font-normal opacity-60">{caption}</span> : null}
+        </span>
+      ) : null}
     </span>
   )
 }
