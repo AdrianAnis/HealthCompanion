@@ -24,7 +24,7 @@ export function BuilderItemCard({ form, index, kind, isAiSuggested, onRemove }: 
   }
 
   return (
-    <div className={cn("space-y-3 rounded-lg border bg-card p-4", isAiSuggested && "border-primary/50 bg-primary/5")}>
+    <div className={cn("space-y-4 rounded-2xl border bg-card p-5", isAiSuggested && "border-primary/50 bg-primary/5")}>
       <div className="flex items-center justify-between gap-2">
         {isAiSuggested ? (
           <div className="flex items-center gap-2">

@@ -4,15 +4,19 @@ type PageHeaderProps = {
   title: string
   description?: string
   actions?: React.ReactNode
+  leading?: React.ReactNode
   className?: string
 }
 
-export function PageHeader({ title, description, actions, className }: PageHeaderProps) {
+export function PageHeader({ title, description, actions, leading, className }: PageHeaderProps) {
   return (
-    <header className={cn("flex flex-wrap items-start justify-between gap-4 border-b bg-card px-4 py-4 md:px-6", className)}>
-      <div className="space-y-0.5">
-        <h1 className="text-lg font-semibold tracking-tight">{title}</h1>
-        {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
+    <header className={cn("flex flex-wrap items-center justify-between gap-4 px-4 pt-6 md:px-6", className)}>
+      <div className="flex items-center gap-4">
+        {leading}
+        <div className="space-y-1">
+          <h1 className="type-title">{title}</h1>
+          {description ? <p className="type-caption">{description}</p> : null}
+        </div>
       </div>
       {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
     </header>
