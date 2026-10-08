@@ -17,15 +17,8 @@ import {
 import { usePatientActions } from "@/features/patient/use-patient-actions"
 import { usePatientContext } from "@/features/patient/use-patient-context"
 import { routes } from "@/lib/routes"
-import { cn } from "@/lib/utils"
+import { cn, getInitials } from "@/lib/utils"
 
-function getInitials(name: string): string {
-  return name
-    .split(" ")
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2)
-}
 
 export function TopNav() {
   const pathname = usePathname()

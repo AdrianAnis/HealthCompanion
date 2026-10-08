@@ -9,7 +9,7 @@ type HospitalShellProps = {
 export function HospitalShell({ children }: HospitalShellProps) {
   return (
     <div className="min-h-dvh lg:flex">
-      <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 lg:block">
+      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 border-r lg:block">
         <SidebarContent />
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">

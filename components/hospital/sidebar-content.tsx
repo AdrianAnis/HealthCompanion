@@ -11,7 +11,7 @@ import { useAuthStore } from "@/features/auth/store"
 import { useDoctorContext } from "@/features/auth/use-doctor-context"
 import { resetAllStores } from "@/lib/reset-demo"
 import { routes } from "@/lib/routes"
-import { cn } from "@/lib/utils"
+import { cn, getInitials } from "@/lib/utils"
 
 type NavItem = {
   href: string
@@ -24,15 +24,6 @@ const NAV_ITEMS: NavItem[] = [
   { href: routes.hospital.patientList, label: "Pasien", icon: Users },
 ]
 
-function getInitials(name: string): string {
-  return name
-    .replace(/^dr\.\s*/i, "")
-    .split(",")[0]
-    ?.split(" ")
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2) ?? ""
-}
 
 type SidebarContentProps = {
   onNavigate?: () => void
@@ -101,7 +92,7 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
             </AvatarFallback>
           </Avatar>
           <div className="min-w-0 flex-1 leading-tight">
-            <p className="truncate text-sm font-medium">{doctor?.name}</p>
+            <p className="truncate text-sm font-medium" title={doctor?.name}>{doctor?.name}</p>
             <p className="truncate text-xs text-sidebar-foreground/60">{doctor?.specialty}</p>
           </div>
           <Button variant="ghost" size="icon" aria-label="Keluar" onClick={handleLogout}>

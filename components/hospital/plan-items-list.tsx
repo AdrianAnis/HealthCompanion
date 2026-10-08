@@ -1,3 +1,4 @@
+import { CARE_PLAN_KIND_ICON } from "@/components/care-plan-kind-icons"
 import { getItemSummary, getItemTitle } from "@/features/care-plan/describe"
 import { CARE_PLAN_ITEM_KIND_LABEL, CARE_PLAN_KIND_ORDER } from "@/features/care-plan/labels"
 import { selectItemsByKind } from "@/features/care-plan/selectors"
@@ -9,20 +10,25 @@ type PlanItemsListProps = {
 
 export function PlanItemsList({ plan }: PlanItemsListProps) {
   return (
-    <div className="space-y-4">
+    <div className="grid gap-6 lg:grid-cols-2">
       {CARE_PLAN_KIND_ORDER.map((kind) => {
         const items = selectItemsByKind(plan, kind)
         if (items.length === 0) return null
+        const KindIcon = CARE_PLAN_KIND_ICON[kind]
         return (
-          <section key={kind}>
-            <h3 className="mb-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          <section key={kind} className="space-y-2.5">
+            <h3 className="flex items-center gap-2.5 text-sm font-semibold">
+              <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <KindIcon className="size-4" />
+              </span>
               {CARE_PLAN_ITEM_KIND_LABEL[kind]}
+              <span className="font-normal text-muted-foreground">{items.length}</span>
             </h3>
-            <ul className="divide-y rounded-md border">
+            <ul className="divide-y rounded-xl border">
               {items.map((item) => (
-                <li key={item.id} className="px-3 py-2">
+                <li key={item.id} className="px-4 py-3">
                   <p className="text-sm font-medium">{getItemTitle(item)}</p>
-                  <p className="text-sm text-muted-foreground">{getItemSummary(item)}</p>
+                  <p className="type-caption">{getItemSummary(item)}</p>
                 </li>
               ))}
             </ul>

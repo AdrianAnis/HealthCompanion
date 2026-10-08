@@ -8,3 +8,13 @@ export function cn(...inputs: ClassValue[]): string {
 export function assertNever(value: never): never {
   throw new Error(`Unhandled case: ${String(value)}`)
 }
+
+export function getInitials(name: string): string {
+  return (name.replace(/^dr\.\s*/i, "").split(",")[0] ?? name)
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase()
+}

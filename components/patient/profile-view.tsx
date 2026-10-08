@@ -24,7 +24,7 @@ export function ProfileView() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { isHydrated, patient, activePlan } = usePatientContext()
+  const { isHydrated, patient } = usePatientContext()
   const doctors = usePatientStore((state) => state.doctors)
   const plans = useCarePlanStore((state) => state.plans)
   const { logout, resetDemo } = usePatientActions()
@@ -50,7 +50,7 @@ export function ProfileView() {
         <section className="min-w-0 rounded-3xl border bg-card p-5 shadow-sm md:col-span-2 md:p-8">
           <h2 className="mb-6 border-b pb-4 type-heading">{activeLabel}</h2>
           {activeSection === "data" ? <ProfileAccountPanel patient={patient} doctor={doctor} now={now} /> : null}
-          {activeSection === "aktivitas" ? <ActivitySection patientId={patient.id} activePlan={activePlan} /> : null}
+          {activeSection === "aktivitas" ? <ActivitySection patientId={patient.id} /> : null}
           {activeSection === "riwayat" ? <ProfileHistoryPanel plans={selectPlanHistory(plans, patient.id)} /> : null}
         </section>
       </div>
