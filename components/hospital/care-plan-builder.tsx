@@ -7,6 +7,7 @@ import { Plus } from "lucide-react"
 import { useFieldArray, useForm, useWatch } from "react-hook-form"
 import { toast } from "sonner"
 
+import { CARE_PLAN_KIND_ICON } from "@/components/care-plan-kind-icons"
 import { BuilderInstructionPanel } from "@/components/hospital/builder-instruction-panel"
 import { BuilderItemCard } from "@/components/hospital/builder-item-card"
 import { BuilderSummaryPanel } from "@/components/hospital/builder-summary-panel"
@@ -106,17 +107,21 @@ export function CarePlanBuilder({ patient, doctor, activePlan, draftPlan, nextVe
   const itemsError = form.formState.errors.items?.message ?? form.formState.errors.items?.root?.message
 
   return (
-    <div className="grid gap-4 p-4 md:p-6 xl:grid-cols-3">
-      <div className="space-y-4 xl:col-span-2">
+    <div className="grid items-start gap-6 p-4 md:p-6 xl:grid-cols-3">
+      <div className="space-y-6 xl:col-span-2">
         <BuilderInstructionPanel form={form} isGenerating={isGenerating} onGenerate={handleGenerate} />
 
         {CARE_PLAN_KIND_ORDER.map((kind) => {
           const kindFields = fields.map((field, index) => ({ field, index })).filter(({ field }) => field.kind === kind)
+          const KindIcon = CARE_PLAN_KIND_ICON[kind]
           return (
-            <section key={kind} className="space-y-2">
+            <section key={kind} className="space-y-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-sm font-semibold">
-                  {CARE_PLAN_ITEM_KIND_LABEL[kind]} <span className="font-normal text-muted-foreground">({kindFields.length})</span>
+                <h2 className="flex items-center gap-2.5 text-sm font-semibold">
+                  <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <KindIcon className="size-4" />
+                  </span>
+                  {CARE_PLAN_ITEM_KIND_LABEL[kind]} <span className="font-normal text-muted-foreground">{kindFields.length}</span>
                 </h2>
                 <Button type="button" variant="outline" size="sm" onClick={() => append(createBlankItem(kind))}>
                   <Plus />
@@ -124,7 +129,7 @@ export function CarePlanBuilder({ patient, doctor, activePlan, draftPlan, nextVe
                 </Button>
               </div>
               {kindFields.length === 0 ? (
-                <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">Belum ada item {CARE_PLAN_ITEM_KIND_LABEL[kind].toLowerCase()}.</p>
+                <p className="rounded-2xl border border-dashed p-5 text-sm text-muted-foreground">Belum ada item {CARE_PLAN_ITEM_KIND_LABEL[kind].toLowerCase()}.</p>
               ) : (
                 kindFields.map(({ field, index }) => (
                   <BuilderItemCard

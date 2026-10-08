@@ -64,14 +64,11 @@ function compareReminders(a: Reminder, b: Reminder): number {
   return a.time.localeCompare(b.time)
 }
 
-export function getTodayReminders(activePlan: CarePlan | undefined, date: DateInput): Reminder[] {
-  if (activePlan?.status !== "active") return []
-
-  const day = toDate(date)
+function buildReminders(plan: CarePlan, day: Date): Reminder[] {
   const dateKey = toDateKey(day)
 
-  const medication = selectItemsByKind(activePlan, "medication")
-    .filter((item) => isMedicationDue(item, activePlan, day))
+  const medication = selectItemsByKind(plan, "medication")
+    .filter((item) => isMedicationDue(item, plan, day))
     .flatMap((item) =>
       item.times.map<Reminder>((time) => ({
         key: reminderKey(item.id, dateKey, time),
@@ -84,8 +81,8 @@ export function getTodayReminders(activePlan: CarePlan | undefined, date: DateIn
       })),
     )
 
-  const activity = selectItemsByKind(activePlan, "activity")
-    .filter((item) => isActivityDue(item, activePlan, day))
+  const activity = selectItemsByKind(plan, "activity")
+    .filter((item) => isActivityDue(item, plan, day))
     .map<Reminder>((item) => ({
       key: reminderKey(item.id, dateKey, ANYTIME_SLOT),
       itemId: item.id,
@@ -97,6 +94,18 @@ export function getTodayReminders(activePlan: CarePlan | undefined, date: DateIn
     }))
 
   return [...medication, ...activity].sort(compareReminders)
+}
+
+export function getTodayReminders(activePlan: CarePlan | undefined, date: DateInput): Reminder[] {
+  if (activePlan?.status !== "active") return []
+  return buildReminders(activePlan, toDate(date))
+}
+
+function selectPlanInEffect(patientPlans: CarePlan[], day: Date): CarePlan | undefined {
+  const dayKey = toDateKey(day)
+  return patientPlans
+    .filter((plan) => plan.confirmedAt !== null && toDateKey(plan.confirmedAt) <= dayKey)
+    .sort((a, b) => b.version - a.version)[0]
 }
 
 function resolveStatus(reminder: Reminder, completion: ReminderCompletion | undefined, now: Date): ReminderStatus {
@@ -130,12 +139,13 @@ export function selectDailyProgress(views: ReminderView[]): { done: number; tota
 }
 
 export function selectAdherenceByDay(
-  activePlan: CarePlan | undefined,
+  patientPlans: CarePlan[],
   completions: Record<string, ReminderCompletion>,
   today: Date,
 ): AdherenceDay[] {
   return getRecentDays(ADHERENCE_WINDOW_DAYS, today).map((day) => {
-    const reminders = getTodayReminders(activePlan, day)
+    const planInEffect = selectPlanInEffect(patientPlans, day)
+    const reminders = planInEffect ? buildReminders(planInEffect, day) : []
     return {
       date: toDateKey(day),
       total: reminders.length,

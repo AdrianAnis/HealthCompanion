@@ -3,7 +3,8 @@
 import { AdherenceChart } from "@/components/adherence-chart"
 import { FeedbackForm } from "@/components/patient/feedback-form"
 import { Badge } from "@/components/ui/badge"
-import type { CarePlan } from "@/features/care-plan/types"
+import { selectPatientPlans } from "@/features/care-plan/selectors"
+import { useCarePlanStore } from "@/features/care-plan/store"
 import { FEEDBACK_CATEGORY_LABEL, FEEDBACK_STATUS_LABEL } from "@/features/feedback/labels"
 import { selectPatientFeedback } from "@/features/feedback/selectors"
 import { useFeedbackStore } from "@/features/feedback/store"
@@ -13,16 +14,16 @@ import { useNow } from "@/lib/use-now"
 
 type ActivitySectionProps = {
   patientId: string
-  activePlan: CarePlan | undefined
 }
 
-export function ActivitySection({ patientId, activePlan }: ActivitySectionProps) {
+export function ActivitySection({ patientId }: ActivitySectionProps) {
+  const plans = useCarePlanStore((state) => state.plans)
   const completions = useFeedbackStore((state) => state.completions)
   const entries = useFeedbackStore((state) => state.entries)
   const addFeedback = useFeedbackStore((state) => state.addFeedback)
   const now = useNow()
 
-  const days = selectAdherenceByDay(activePlan, completions, now)
+  const days = selectAdherenceByDay(selectPatientPlans(plans, patientId), completions, now)
   const feedback = selectPatientFeedback(entries, patientId)
 
   return (

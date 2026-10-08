@@ -4,7 +4,7 @@ import { PROFILE_SECTIONS, type ProfileSectionValue } from "@/components/patient
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import type { Patient } from "@/features/patient/types"
-import { cn } from "@/lib/utils"
+import { cn, getInitials } from "@/lib/utils"
 
 type ProfileSidebarProps = {
   patient: Patient
@@ -16,13 +16,6 @@ type ProfileSidebarProps = {
 
 const MENU_ITEM_CLASS = "flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-sm font-medium transition-colors"
 
-function getInitials(name: string): string {
-  return name
-    .split(" ")
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2)
-}
 
 export function ProfileSidebar({ patient, activeSection, onSelect, onResetDemo, onLogout }: ProfileSidebarProps) {
   return (

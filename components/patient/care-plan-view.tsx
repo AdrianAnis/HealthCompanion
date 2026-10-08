@@ -4,7 +4,7 @@ import { Suspense } from "react"
 import Link from "next/link"
 import { ChevronRight, ClipboardX } from "lucide-react"
 
-import { CARE_PLAN_KIND_ICON } from "@/components/patient/care-plan-kind-icons"
+import { CARE_PLAN_KIND_ICON } from "@/components/care-plan-kind-icons"
 import { CarePlanItemDialog } from "@/components/patient/care-plan-item-dialog"
 import { EmptyState } from "@/components/patient/empty-state"
 import { PageSkeleton } from "@/components/patient/page-skeleton"

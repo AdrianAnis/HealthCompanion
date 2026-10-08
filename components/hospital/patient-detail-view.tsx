@@ -7,9 +7,10 @@ import { HospitalPageSkeleton } from "@/components/hospital/hospital-page-skelet
 import { PageHeader } from "@/components/hospital/page-header"
 import { PatientHistoryTimeline } from "@/components/hospital/patient-history-timeline"
 import { PlanItemsList } from "@/components/hospital/plan-items-list"
-import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { useFeedbackStore } from "@/features/feedback/store"
 import { selectPatientAge } from "@/features/patient/selectors"
 import { usePatientRecord } from "@/features/patient/use-patient-record"
@@ -17,13 +18,31 @@ import { selectAdherenceByDay, selectAdherenceRatio } from "@/features/reminder/
 import { formatDate } from "@/lib/date"
 import { routes } from "@/lib/routes"
 import { useNow } from "@/lib/use-now"
+import { getInitials } from "@/lib/utils"
 
 type PatientDetailViewProps = {
   patientId: string
 }
 
+type ReadOnlyFieldProps = {
+  id: string
+  label: string
+  value: string
+}
+
+function ReadOnlyField({ id, label, value }: ReadOnlyFieldProps) {
+  return (
+    <div className="space-y-1.5">
+      <Label htmlFor={id} className="text-muted-foreground">
+        {label}
+      </Label>
+      <Input id={id} readOnly value={value} className="border-transparent bg-muted focus-visible:ring-0" />
+    </div>
+  )
+}
+
 export function PatientDetailView({ patientId }: PatientDetailViewProps) {
-  const { isHydrated, patient, doctor, activePlan, draftPlan, healthHistory } = usePatientRecord(patientId)
+  const { isHydrated, patient, doctor, activePlan, draftPlan, planHistory, healthHistory } = usePatientRecord(patientId)
   const completions = useFeedbackStore((state) => state.completions)
   const now = useNow()
 
@@ -44,25 +63,31 @@ export function PatientDetailView({ patientId }: PatientDetailViewProps) {
     )
   }
 
-  const adherenceRatio = selectAdherenceRatio(selectAdherenceByDay(activePlan, completions, now))
+  const adherenceRatio = selectAdherenceRatio(selectAdherenceByDay(planHistory, completions, now))
+  const adherencePercentage = adherenceRatio === null ? 0 : Math.round(adherenceRatio * 100)
 
   return (
     <>
       <PageHeader
         title={patient.name}
         description={`${patient.mrn} · ${patient.primaryDiagnosis}`}
+        leading={
+          <Avatar className="size-14">
+            <AvatarFallback className="bg-primary/10 text-lg font-semibold text-primary">{getInitials(patient.name)}</AvatarFallback>
+          </Avatar>
+        }
         actions={
           <>
-            <Button asChild variant="outline" size="sm">
+            <Button asChild variant="outline">
               <Link href={routes.hospital.monitoring(patient.id)}>
                 <LineChart />
                 Monitoring
               </Link>
             </Button>
-            <Button asChild variant="outline" size="sm">
+            <Button asChild variant="outline">
               <Link href={routes.hospital.carePlanHistory(patient.id)}>Riwayat versi</Link>
             </Button>
-            <Button asChild size="sm">
+            <Button asChild>
               <Link href={routes.hospital.carePlanNew(patient.id)}>
                 <FilePenLine />
                 {draftPlan ? "Tinjau draft" : "Revisi care plan"}
@@ -72,88 +97,62 @@ export function PatientDetailView({ patientId }: PatientDetailViewProps) {
         }
       />
 
-      <div className="grid gap-4 p-4 md:p-6 xl:grid-cols-3">
-        <div className="space-y-4 xl:col-span-1">
-          <Card>
-            <CardHeader>
-              <CardTitle>Identitas</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <dl className="grid grid-cols-2 gap-3 text-sm">
-                <Fact label="Usia" value={`${selectPatientAge(patient, now)} tahun`} />
-                <Fact label="Jenis kelamin" value={patient.gender === "male" ? "Laki-laki" : "Perempuan"} />
-                <Fact label="Nomor HP" value={patient.phone} />
-                <Fact label="Dokter" value={doctor?.name ?? "-"} />
-                <Fact label="Kondisi" value={patient.conditions.join(", ")} />
-                <Fact label="Alergi" value={patient.allergies.length > 0 ? patient.allergies.join(", ") : "Tidak ada"} />
-              </dl>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Riwayat kesehatan</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <PatientHistoryTimeline entries={healthHistory} />
-            </CardContent>
-          </Card>
+      <div className="grid items-start gap-6 p-4 md:p-6 xl:grid-cols-3">
+        <div className="space-y-6">
+          <section className="space-y-4 rounded-2xl border bg-card p-5">
+            <h2 className="type-subheading">Identitas</h2>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+              <ReadOnlyField id="detail-age" label="Usia" value={`${selectPatientAge(patient, now)} tahun`} />
+              <ReadOnlyField id="detail-phone" label="Nomor HP" value={patient.phone} />
+              <ReadOnlyField id="detail-conditions" label="Kondisi" value={patient.conditions.join(", ")} />
+              <ReadOnlyField id="detail-allergies" label="Alergi" value={patient.allergies.length > 0 ? patient.allergies.join(", ") : "Tidak ada"} />
+              <ReadOnlyField id="detail-doctor" label="Dokter" value={doctor?.name ?? "-"} />
+            </div>
+          </section>
+
+          <section className="space-y-4 rounded-2xl border bg-card p-5">
+            <h2 className="type-subheading">Riwayat kesehatan</h2>
+            <PatientHistoryTimeline entries={healthHistory} />
+          </section>
         </div>
 
-        <div className="space-y-4 xl:col-span-2">
+        <div className="space-y-6 xl:col-span-2">
           {draftPlan ? (
-            <Card className="border-warning/50 bg-warning/10">
-              <CardHeader>
-                <CardTitle>Draft v{draftPlan.version} menunggu konfirmasi</CardTitle>
-                <CardDescription>
-                  Dibuat {formatDate(draftPlan.createdAt)}. Pasien belum menerima perubahan ini.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button asChild size="sm">
-                  <Link href={routes.hospital.carePlanNew(patient.id)}>Tinjau dan konfirmasi</Link>
-                </Button>
-              </CardContent>
-            </Card>
+            <section className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-primary/25 bg-primary/10 p-5">
+              <div>
+                <h2 className="type-subheading">Draft v{draftPlan.version} menunggu konfirmasi</h2>
+                <p className="type-caption">Dibuat {formatDate(draftPlan.createdAt)}. Pasien belum menerima perubahan ini.</p>
+              </div>
+              <Button asChild>
+                <Link href={routes.hospital.carePlanNew(patient.id)}>Tinjau dan konfirmasi</Link>
+              </Button>
+            </section>
           ) : null}
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                Care plan aktif
-                {activePlan ? <Badge>v{activePlan.version}</Badge> : null}
-              </CardTitle>
-              <CardDescription>
+          <section className="space-y-5 rounded-2xl border bg-card p-5">
+            <header>
+              <h2 className="type-subheading">Care plan aktif{activePlan ? ` · Versi ${activePlan.version}` : ""}</h2>
+              <p className="type-caption">
                 {activePlan?.confirmedAt ? `Dikonfirmasi ${formatDate(activePlan.confirmedAt)}` : "Belum ada care plan aktif."}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>{activePlan ? <PlanItemsList plan={activePlan} /> : null}</CardContent>
-          </Card>
+              </p>
+            </header>
+            {activePlan ? <PlanItemsList plan={activePlan} /> : null}
+          </section>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Jadwal yang ditandai pasien (7 hari)</CardTitle>
-              <CardDescription>Data perilaku, bukan indikator kesembuhan.</CardDescription>
-            </CardHeader>
-            <CardContent className="text-3xl font-semibold">
-              {adherenceRatio === null ? "-" : `${Math.round(adherenceRatio * 100)}%`}
-            </CardContent>
-          </Card>
+          <section className="space-y-3 rounded-2xl border bg-card p-5">
+            <header className="flex items-baseline justify-between gap-3">
+              <div>
+                <h2 className="type-subheading">Jadwal yang ditandai pasien</h2>
+                <p className="type-caption">7 hari terakhir. Data perilaku, bukan indikator kesembuhan.</p>
+              </div>
+              <span className="text-2xl font-semibold tabular-nums">{adherenceRatio === null ? "-" : `${adherencePercentage}%`}</span>
+            </header>
+            <div className="h-2 overflow-hidden rounded-full bg-muted" aria-hidden="true">
+              <div className="h-full rounded-full bg-primary" style={{ width: `${adherencePercentage}%` }} />
+            </div>
+          </section>
         </div>
       </div>
     </>
-  )
-}
-
-type FactProps = {
-  label: string
-  value: string
-}
-
-function Fact({ label, value }: FactProps) {
-  return (
-    <div>
-      <dt className="text-xs text-muted-foreground">{label}</dt>
-      <dd className="font-medium">{value}</dd>
-    </div>
   )
 }
