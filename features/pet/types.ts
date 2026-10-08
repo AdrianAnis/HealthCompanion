@@ -1,3 +1,5 @@
+export type PetKind = "cat" | "dog"
+
 export type PetMood = "happy" | "neutral" | "sleepy"
 
 export type DayPart = "morning" | "day" | "night"

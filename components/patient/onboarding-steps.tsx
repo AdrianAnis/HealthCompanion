@@ -5,19 +5,19 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 import { BrandLogo } from "@/components/brand-logo"
+import { WelcomeScene } from "@/components/patient/welcome-scene"
 import { Button } from "@/components/ui/button"
 import { routes } from "@/lib/routes"
 import { cn } from "@/lib/utils"
 
 type OnboardingStep = {
-  image: string
+  image?: string
   title: string
   description: string
 }
 
 const ONBOARDING_STEPS: OnboardingStep[] = [
   {
-    image: "/grafis/duo-walk.svg",
     title: "Selamat datang di aplikasi SehatIn!",
     description: "Platform pendamping harian untuk membantu Anda merencanakan pemulihan dan aktivitas dengan lebih aman.",
   },
@@ -82,16 +82,20 @@ export function OnboardingSteps() {
         <div className="pointer-events-none absolute top-0 right-0 size-96 -translate-y-1/3 translate-x-1/3 rounded-full bg-primary/10 blur-3xl" />
         <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-10 md:flex-row md:gap-24">
           <div className="flex aspect-square w-full max-w-72 flex-1 items-center justify-center rounded-[3rem] bg-primary p-8 md:max-w-md md:p-12">
-            <Image
-              key={step.image}
-              src={step.image}
-              alt=""
-              width={400}
-              height={400}
-              unoptimized
-              priority
-              className="pet-float size-full object-contain duration-700 animate-in fade-in slide-in-from-left-8"
-            />
+            {step.image ? (
+              <Image
+                key={step.image}
+                src={step.image}
+                alt=""
+                width={400}
+                height={400}
+                unoptimized
+                priority
+                className="pet-float size-full object-contain duration-700 animate-in fade-in slide-in-from-left-8"
+              />
+            ) : (
+              <WelcomeScene />
+            )}
           </div>
 
           <div className="flex w-full max-w-md flex-1 flex-col text-center md:text-left">

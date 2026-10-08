@@ -7,6 +7,7 @@ import { useCarePlanStore } from "@/features/care-plan/store"
 import { useCompanionStore } from "@/features/companion/store"
 import { useFeedbackStore } from "@/features/feedback/store"
 import { usePatientStore } from "@/features/patient/store"
+import { usePetStore } from "@/features/pet/store"
 
 export type PersistedStore = {
   persist: {
@@ -23,6 +24,7 @@ export const persistedStores: PersistedStore[] = [
   usePatientStore,
   useFeedbackStore,
   useCompanionStore,
+  usePetStore,
 ]
 
 function rehydrateStores(): void {

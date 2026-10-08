@@ -1,4 +1,4 @@
-import type { AchievementId, DayPart, PetMood } from "@/features/pet/types"
+import type { AchievementId, DayPart, PetKind, PetMood } from "@/features/pet/types"
 
 export const PET_MOOD_MESSAGE: Record<PetMood, string> = {
   happy: "Semua jadwal hari ini sudah kamu tandai. Mantap!",
@@ -25,4 +25,9 @@ export const ROBOT_IMAGE_BY_DAY_PART: Record<DayPart, string> = {
   morning: "/grafis/robot-morning.svg",
   day: "/grafis/robot-companion.svg",
   night: "/grafis/robot-night.svg",
+}
+
+export const PET_KIND_LABEL: Record<PetKind, string> = {
+  cat: "Kucing",
+  dog: "Anjing",
 }

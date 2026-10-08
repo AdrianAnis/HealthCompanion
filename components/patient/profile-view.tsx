@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import { ActivitySection } from "@/components/patient/activity-section"
 import { PageSkeleton } from "@/components/patient/page-skeleton"
+import { ProfileCompanionPanel } from "@/components/patient/profile-companion-panel"
 import { ProfileAccountPanel } from "@/components/patient/profile-account-panel"
 import { ProfileHistoryPanel } from "@/components/patient/profile-history-panel"
 import { DEFAULT_PROFILE_SECTION, PROFILE_SECTIONS, type ProfileSectionValue } from "@/components/patient/profile-sections"
@@ -50,6 +51,7 @@ export function ProfileView() {
         <section className="min-w-0 rounded-3xl border bg-card p-5 shadow-sm md:col-span-2 md:p-8">
           <h2 className="mb-6 border-b pb-4 type-heading">{activeLabel}</h2>
           {activeSection === "data" ? <ProfileAccountPanel patient={patient} doctor={doctor} now={now} /> : null}
+          {activeSection === "teman" ? <ProfileCompanionPanel /> : null}
           {activeSection === "aktivitas" ? <ActivitySection patientId={patient.id} /> : null}
           {activeSection === "riwayat" ? <ProfileHistoryPanel plans={selectPlanHistory(plans, patient.id)} /> : null}
         </section>

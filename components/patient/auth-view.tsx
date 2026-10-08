@@ -96,7 +96,7 @@ export function AuthView() {
 
   function handleAuthenticated(): void {
     loginPatient()
-    router.replace(routes.patient.today)
+    router.replace(isSignUp ? routes.patient.chooseCompanion : routes.patient.today)
   }
 
   return (
