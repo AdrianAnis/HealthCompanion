@@ -10,7 +10,7 @@ const nunito = Nunito({
 })
 
 export const metadata: Metadata = {
-  title: "Halaman tidak ditemukan · Health Companion",
+  title: "Halaman tidak ditemukan · SehatIn",
 }
 
 export default function GlobalNotFound() {

@@ -2,9 +2,10 @@
 
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { Activity, LayoutDashboard, LogOut, RotateCcw, Users, type LucideIcon } from "lucide-react"
+import { LayoutDashboard, LogOut, RotateCcw, Users, type LucideIcon } from "lucide-react"
 import { toast } from "sonner"
 
+import { BrandLogo } from "@/components/brand-logo"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { useAuthStore } from "@/features/auth/store"
@@ -57,12 +58,9 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
   return (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex h-14 items-center gap-2 border-b border-sidebar-border px-4">
-        <span className="flex size-7 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-          <Activity className="size-4" />
-        </span>
         <div className="leading-tight">
-          <p className="text-sm font-semibold">Health Companion</p>
-          <p className="text-xs text-sidebar-foreground/60">Clinician workspace</p>
+          <BrandLogo size="sm" className="text-sidebar-foreground" />
+          <p className="mt-1 text-xs text-sidebar-foreground/60">Clinician workspace</p>
         </div>
       </div>
 

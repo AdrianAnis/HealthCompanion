@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Menu } from "lucide-react"
 
+import { BrandLogo } from "@/components/brand-logo"
 import { SidebarContent } from "@/components/hospital/sidebar-content"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
@@ -26,7 +27,7 @@ export function MobileTopbar() {
           <SidebarContent onNavigate={() => setIsOpen(false)} />
         </SheetContent>
       </Sheet>
-      <p className="font-semibold">Health Companion</p>
+      <BrandLogo size="sm" />
     </header>
   )
 }

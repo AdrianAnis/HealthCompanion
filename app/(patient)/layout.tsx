@@ -14,8 +14,8 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Health Companion",
-    template: "%s · Health Companion",
+    default: "SehatIn",
+    template: "%s · SehatIn",
   },
   description: "Teman pemulihan Anda: pengingat obat, anjuran makan, dan aktivitas sesuai rencana dokter.",
 }

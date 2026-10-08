@@ -1,0 +1,47 @@
+import { HeartHandshake } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+
+type BrandLogoSize = "sm" | "md" | "lg"
+
+type BrandLogoProps = {
+  size?: BrandLogoSize
+  isInverted?: boolean
+  hasName?: boolean
+  className?: string
+}
+
+const MARK_CLASS: Record<BrandLogoSize, string> = {
+  sm: "size-8",
+  md: "size-9",
+  lg: "size-14",
+}
+
+const ICON_CLASS: Record<BrandLogoSize, string> = {
+  sm: "size-4",
+  md: "size-5",
+  lg: "size-8",
+}
+
+const NAME_CLASS: Record<BrandLogoSize, string> = {
+  sm: "text-base",
+  md: "text-lg",
+  lg: "text-3xl",
+}
+
+export function BrandLogo({ size = "md", isInverted = false, hasName = true, className }: BrandLogoProps) {
+  return (
+    <span className={cn("flex items-center gap-2.5 font-semibold", isInverted ? "text-primary-foreground" : "text-primary", className)}>
+      <span
+        className={cn(
+          "flex shrink-0 items-center justify-center rounded-full",
+          MARK_CLASS[size],
+          isInverted ? "bg-primary-foreground text-primary" : "bg-primary text-primary-foreground",
+        )}
+      >
+        <HeartHandshake className={ICON_CLASS[size]} />
+      </span>
+      {hasName ? <span className={cn("tracking-tight", NAME_CLASS[size])}>SehatIn</span> : null}
+    </span>
+  )
+}
