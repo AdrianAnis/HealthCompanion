@@ -17,6 +17,7 @@ import { TodayHeader } from "@/components/patient/today-header"
 import { selectItemsByKind, selectNextFollowUp, selectPatientPlans } from "@/features/care-plan/selectors"
 import { useCarePlanStore } from "@/features/care-plan/store"
 import { useFeedbackStore } from "@/features/feedback/store"
+import { usePetStore } from "@/features/pet/store"
 import { selectAchievements, selectCompleteDayStreak, selectConsistencyLevel, selectPetMood } from "@/features/pet/selectors"
 import { selectFirstName, selectHonorific } from "@/features/patient/selectors"
 import { usePatientContext } from "@/features/patient/use-patient-context"
@@ -32,6 +33,7 @@ import { useNow } from "@/lib/use-now"
 
 export function TodayView() {
   const { isHydrated, patient, activePlan, activeDoctor } = usePatientContext()
+  const petKind = usePetStore((state) => state.kind)
   const plans = useCarePlanStore((state) => state.plans)
   const completions = useFeedbackStore((state) => state.completions)
   const toggleCompletion = useFeedbackStore((state) => state.toggleCompletion)
@@ -64,6 +66,7 @@ export function TodayView() {
           </div>
           <aside className="min-w-0 space-y-6 lg:col-span-5 xl:col-span-4">
             <PetCard
+              kind={petKind}
               mood={selectPetMood(progress, now)}
               level={selectConsistencyLevel(adherenceDays)}
               streak={selectCompleteDayStreak(adherenceDays)}

@@ -82,6 +82,70 @@
   }
 }
 
+@keyframes pet-wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-22deg);
+  }
+}
+
+@keyframes pet-paw {
+  0%, 60%, 100% {
+    transform: rotate(0deg);
+  }
+  15%, 45% {
+    transform: rotate(-55deg);
+  }
+  30% {
+    transform: rotate(-30deg);
+  }
+}
+
+@keyframes pet-fly {
+  0%, 100% {
+    transform: translate(-45%, 18%) rotate(-10deg);
+  }
+  50% {
+    transform: translate(45%, -12%) rotate(10deg);
+  }
+}
+
+@keyframes pet-heart {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-70px) scale(1.1);
+  }
+}
+
+@keyframes pet-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(48px) scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pet-jump {
+  0%, 100% {
+    transform: translateY(0) scale(1.1);
+  }
+  40% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
 @keyframes pet-ear {
   0%, 85%, 100% {
     transform: rotate(0deg);
@@ -97,8 +161,36 @@
 
 .pet-tail {
   transform-box: fill-box;
-  transform-origin: 95% 70%;
+  transform-origin: 8% 75%;
   animation: pet-tail 1.8s ease-in-out infinite;
+}
+
+.pet-wave {
+  transform-box: view-box;
+  transform-origin: 195px 165px;
+  animation: pet-wave 0.9s ease-in-out infinite;
+}
+
+.pet-paw {
+  transform-box: fill-box;
+  transform-origin: 0% 0%;
+  animation: pet-paw 3.4s ease-in-out infinite;
+}
+
+.pet-paw-late {
+  animation-delay: 1.7s;
+}
+
+.pet-fly {
+  animation: pet-fly 6s ease-in-out infinite;
+}
+
+.pet-heart {
+  animation: pet-heart 3s ease-out infinite;
+}
+
+.pet-pop-in {
+  animation: pet-pop-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
 .pet-eye {
@@ -121,6 +213,11 @@
 @media (prefers-reduced-motion: reduce) {
   .pet-float,
   .pet-tail,
+  .pet-wave,
+  .pet-paw,
+  .pet-fly,
+  .pet-heart,
+  .pet-pop-in,
   .pet-eye,
   .pet-ear-left,
   .pet-ear-right {

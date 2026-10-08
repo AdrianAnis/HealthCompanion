@@ -1,25 +1,26 @@
 import { Flame, Lock, Trophy } from "lucide-react"
 
-import { PetMascot } from "@/components/patient/pet-mascot"
+import { PetAvatar } from "@/components/patient/pet-avatar"
 import { RingOrnament } from "@/components/ring-ornament"
 import { ACHIEVEMENT_COPY, PET_MOOD_MESSAGE } from "@/features/pet/labels"
-import type { Achievement, ConsistencyLevel, PetMood } from "@/features/pet/types"
+import type { Achievement, ConsistencyLevel, PetKind, PetMood } from "@/features/pet/types"
 import { cn } from "@/lib/utils"
 
 type PetCardProps = {
+  kind: PetKind
   mood: PetMood
   level: ConsistencyLevel
   streak: number
   achievements: Achievement[]
 }
 
-export function PetCard({ mood, level, streak, achievements }: PetCardProps) {
+export function PetCard({ kind, mood, level, streak, achievements }: PetCardProps) {
   return (
     <section className="overflow-hidden rounded-3xl border bg-card shadow-sm">
       <div className="relative flex items-center gap-5 overflow-hidden bg-primary p-6">
         <RingOrnament />
         <div className="relative w-28 shrink-0 rounded-3xl bg-primary-foreground/15 p-4 backdrop-blur-sm">
-          <PetMascot level={level} />
+          <PetAvatar kind={kind} level={level} />
         </div>
         <div className="relative min-w-0 space-y-2">
           <h2 className="text-xl leading-snug font-semibold text-primary-foreground">Teman kamu</h2>

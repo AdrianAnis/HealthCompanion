@@ -19,6 +19,7 @@ export const routes = {
     carePlan: "/patient/care-plan",
     carePlanItem: (itemId: string) => `?${ITEM_QUERY_KEY}=${itemId}`,
     companion: "/patient/companion",
+    chooseCompanion: "/patient/choose-companion",
     report: "/patient/profile?tab=aktivitas#lapor-keluhan",
     profile: "/patient/profile",
   },
