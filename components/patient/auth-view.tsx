@@ -4,9 +4,10 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Activity, ChevronLeft } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 import { useForm } from "react-hook-form"
 
+import { BrandLogo } from "@/components/brand-logo"
 import { FloatingField } from "@/components/floating-field"
 import { SocialLoginButtons } from "@/components/patient/social-login-buttons"
 import { Button } from "@/components/ui/button"
@@ -108,10 +109,7 @@ export function AuthView() {
           <ChevronLeft className="mr-1 size-5" />
           Kembali
         </Link>
-        <div className="flex items-center text-2xl font-semibold tracking-tight md:mb-8 md:text-3xl">
-          <Activity className="mr-2.5 size-8 md:size-10" />
-          Health Companion
-        </div>
+        <BrandLogo size="lg" isInverted className="md:mb-8" />
         <div className="hidden md:block">
           <h1 className="mb-6 type-display text-primary-foreground">Mulai langkah sehat Anda hari ini.</h1>
           <p className="max-w-md text-base text-primary-foreground/80">

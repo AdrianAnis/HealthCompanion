@@ -21,7 +21,7 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: "Health Companion for Clinicians",
+    default: "SehatIn untuk Dokter",
     template: "%s · HC Clinician",
   },
   description: "Care plan workspace for doctors: build, confirm, and monitor patient care plans.",

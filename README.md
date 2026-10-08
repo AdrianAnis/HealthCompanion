@@ -1,4 +1,4 @@
-# Health Companion
+# SehatIn
 
 Frontend-only hackathon demo. Two surfaces in one Next.js app, all data mocked and persisted in `localStorage`.
 

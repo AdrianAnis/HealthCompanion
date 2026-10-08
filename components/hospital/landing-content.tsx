@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, HeartHandshake } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 import {
   HERO_PHOTO_ALT,
@@ -8,6 +8,7 @@ import {
   LANDING_QUESTIONS,
   LANDING_STEPS,
 } from "@/components/hospital/landing-copy"
+import { BrandLogo } from "@/components/brand-logo"
 import { LandingPhoto } from "@/components/hospital/landing-photo"
 import { Reveal } from "@/components/reveal"
 import { RingOrnament } from "@/components/ring-ornament"
@@ -26,11 +27,8 @@ export function LandingContent() {
     <div className="min-h-dvh bg-surface-warm">
       <header className="sticky top-0 z-40 border-b bg-surface-warm/90 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-8">
-          <Link href={routes.hospital.landing} className="flex items-center gap-2.5 font-semibold">
-            <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              <HeartHandshake className="size-5" />
-            </span>
-            <span className="text-primary">Health Companion</span>
+          <Link href={routes.hospital.landing} aria-label="SehatIn">
+            <BrandLogo />
           </Link>
           <nav aria-label="Navigasi landing" className="hidden items-center gap-8 text-sm font-medium md:flex">
             {NAV_LINKS.map((link) => (
@@ -140,7 +138,7 @@ export function LandingContent() {
 
       <footer className="border-t">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-8">
-          <p>Health Companion for Clinicians · Demo hackathon, data fiktif.</p>
+          <p>SehatIn untuk Dokter · Demo hackathon, data fiktif.</p>
           <p>Foto oleh kontributor di Unsplash.</p>
         </div>
       </footer>

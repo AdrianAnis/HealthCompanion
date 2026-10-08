@@ -55,6 +55,79 @@
   --animate-float: float 4s ease-in-out infinite;
 }
 
+@keyframes pet-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pet-tail {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-9deg);
+  }
+}
+
+@keyframes pet-blink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes pet-ear {
+  0%, 85%, 100% {
+    transform: rotate(0deg);
+  }
+  92% {
+    transform: rotate(-6deg);
+  }
+}
+
+.pet-float {
+  animation: pet-float 3.6s ease-in-out infinite;
+}
+
+.pet-tail {
+  transform-box: fill-box;
+  transform-origin: 95% 70%;
+  animation: pet-tail 1.8s ease-in-out infinite;
+}
+
+.pet-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pet-blink 4.5s ease-in-out infinite;
+}
+
+.pet-ear-left,
+.pet-ear-right {
+  transform-box: fill-box;
+  transform-origin: 50% 90%;
+  animation: pet-ear 6s ease-in-out infinite;
+}
+
+.pet-ear-right {
+  animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-float,
+  .pet-tail,
+  .pet-eye,
+  .pet-ear-left,
+  .pet-ear-right {
+    animation: none;
+  }
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0);

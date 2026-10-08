@@ -3,8 +3,8 @@
 import { useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { HeartHandshake } from "lucide-react"
 
+import { BrandLogo } from "@/components/brand-logo"
 import { Button } from "@/components/ui/button"
 import { routes } from "@/lib/routes"
 import { cn } from "@/lib/utils"
@@ -17,19 +17,19 @@ type OnboardingStep = {
 
 const ONBOARDING_STEPS: OnboardingStep[] = [
   {
-    image: "/step-1.svg",
-    title: "Selamat datang di aplikasi Health Companion!",
+    image: "/grafis/duo-walk.svg",
+    title: "Selamat datang di aplikasi SehatIn!",
     description: "Platform pendamping harian untuk membantu Anda merencanakan pemulihan dan aktivitas dengan lebih aman.",
   },
   {
-    image: "/step-2.svg",
+    image: "/grafis/robot-morning.svg",
     title: "Rencanakan dan taklukkan jadwal Anda",
-    description: "Health Companion membantu Anda merencanakan, mempersiapkan, dan memantau kepatuhan dalam satu aplikasi.",
+    description: "SehatIn membantu Anda merencanakan, mempersiapkan, dan memantau kepatuhan dalam satu aplikasi.",
   },
   {
-    image: "/step-3.svg",
+    image: "/grafis/duo-happy.svg",
     title: "Terhubung dengan dokter secara langsung",
-    description: "Health Companion menyinkronkan data kesehatan Anda langsung dengan rumah sakit secara real-time.",
+    description: "SehatIn menyinkronkan data kesehatan Anda langsung dengan rumah sakit secara real-time.",
   },
 ]
 
@@ -73,10 +73,7 @@ export function OnboardingSteps() {
     <div className="flex min-h-dvh flex-col bg-card">
       <header className="border-b bg-card/90 px-6 py-4 backdrop-blur md:px-12">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <span className="flex items-center gap-2 type-heading tracking-tight text-primary">
-            <HeartHandshake className="size-6" />
-            Health Companion
-          </span>
+          <BrandLogo />
           <StepIndicator activeIndex={stepIndex} className="hidden w-64 md:flex" />
         </div>
       </header>
@@ -84,7 +81,7 @@ export function OnboardingSteps() {
       <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-6 py-10">
         <div className="pointer-events-none absolute top-0 right-0 size-96 -translate-y-1/3 translate-x-1/3 rounded-full bg-primary/10 blur-3xl" />
         <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-10 md:flex-row md:gap-24">
-          <div className="flex w-full flex-1 items-center justify-center">
+          <div className="flex aspect-square w-full max-w-72 flex-1 items-center justify-center rounded-[3rem] bg-primary p-8 md:max-w-md md:p-12">
             <Image
               key={step.image}
               src={step.image}
@@ -93,7 +90,7 @@ export function OnboardingSteps() {
               height={400}
               unoptimized
               priority
-              className="aspect-square w-full max-w-72 animate-float object-contain duration-700 animate-in fade-in slide-in-from-left-8 md:max-w-md"
+              className="pet-float size-full object-contain duration-700 animate-in fade-in slide-in-from-left-8"
             />
           </div>
 

@@ -3,9 +3,10 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ChevronLeft, HeartHandshake } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 import { useForm } from "react-hook-form"
 
+import { BrandLogo } from "@/components/brand-logo"
 import { FloatingField } from "@/components/floating-field"
 import { RingOrnament } from "@/components/ring-ornament"
 import { Button } from "@/components/ui/button"
@@ -42,15 +43,13 @@ export function LoginView() {
           Kembali ke beranda
         </Link>
         <div className="relative space-y-4">
-          <span className="flex size-14 items-center justify-center rounded-2xl bg-primary-foreground/15">
-            <HeartHandshake className="size-8" />
-          </span>
+          <BrandLogo size="lg" isInverted />
           <h1 className="type-display text-primary-foreground">Workspace dokter</h1>
           <p className="max-w-md text-primary-foreground/80">
             Susun, konfirmasi, dan pantau care plan pasien Anda. Perubahan langsung diterima pasien di aplikasi mereka.
           </p>
         </div>
-        <p className="relative text-sm text-primary-foreground/70">Health Companion for Clinicians</p>
+        <p className="relative text-sm text-primary-foreground/70">SehatIn untuk Dokter</p>
       </div>
 
       <div className="flex items-center justify-center bg-card px-4 py-10 md:px-12">

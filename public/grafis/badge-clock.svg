@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.11 95.02">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-1, .cls-7 {
+        fill: #2e3192;
+      }
+
+      .cls-2 {
+        fill: #f2f2f2;
+      }
+
+      .cls-7 {
+        stroke: #e6e6e6;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .cls-3 {
+        fill: #e6e6e6;
+      }
+
+      .cls-4, .cls-8 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: #1b1464;
+      }
+
+      .cls-6 {
+        fill: #29abe2;
+      }
+
+      .cls-8 {
+        font-family: FuturaBT-Bold, 'Futura Md BT';
+        font-size: 7.58px;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <ellipse class="cls-7" cx="53.05" cy="47.51" rx="50.55" ry="45.01"/>
+      <g>
+        <path class="cls-3" d="M45.82,37.53l-7.04,6.35c-.85.76-2.19.28-2.37-.86l-1.67-10.52c-.19-1.17,1.01-2.06,2.06-1.53l3.24,1.64,5.42,2.5c.94.44,1.13,1.71.36,2.41Z"/>
+        <path class="cls-3" d="M61.75,36.06l6.36-5.76c.81-.74,2.1-.21,2.19.89l.92,11.84c.09,1.15-1.2,1.86-2.1,1.17l-3.03-2.31s-.05-.04-.08-.06l-4.25-3.77c-.6-.53-.6-1.47,0-2Z"/>
+        <path class="cls-1" d="M63.92,37.12l3.63-3.29c.46-.42,1.2-.12,1.25.51l.52,6.75c.05.65-.68,1.06-1.2.67l-1.73-1.32s-.03-.02-.04-.04l-2.42-2.15c-.34-.3-.34-.84,0-1.14Z"/>
+        <path class="cls-1" d="M43.68,37.96l-3.63,3.27c-.44.39-1.13.14-1.22-.44l-.86-5.42c-.1-.6.52-1.06,1.06-.79l1.67.85,2.79,1.29c.49.22.58.88.19,1.24Z"/>
+        <ellipse class="cls-4" cx="53.96" cy="51.89" rx="19.32" ry="17.22"/>
+        <g>
+          <path class="cls-5" d="M53.97,64.26c-7.22,0-13.09-4.72-13.09-10.52s5.87-10.52,13.09-10.52,13.09,4.72,13.09,10.52-5.87,10.52-13.09,10.52Z"/>
+          <path class="cls-2" d="M53.97,43.72c6.94,0,12.59,4.49,12.59,10.02s-5.65,10.02-12.59,10.02-12.59-4.49-12.59-10.02,5.65-10.02,12.59-10.02M53.97,42.72c-7.51,0-13.59,4.93-13.59,11.02s6.09,11.02,13.59,11.02,13.59-4.93,13.59-11.02-6.09-11.02-13.59-11.02h0Z"/>
+        </g>
+        <ellipse class="cls-6" cx="47.81" cy="53" rx="2.2" ry="3.94"/>
+        <ellipse class="cls-6" cx="59.63" cy="53" rx="2.2" ry="3.94"/>
+        <path class="cls-6" d="M56.42,58.78c0,.69-1.12,1.24-2.51,1.24s-2.51-.56-2.51-1.24,1.11-.64,2.49-.64,2.53-.04,2.53.64Z"/>
+      </g>
+      <rect class="cls-4" x="5.03" y="49.55" width="8.21" height="1.26"/>
+      <rect class="cls-4" x="93.5" y="48.92" width="8.21" height="1.26"/>
+      <rect class="cls-4" x="49.58" y="8.16" width="8.21" height="1.26" transform="translate(44.9 62.47) rotate(-90)"/>
+      <rect class="cls-4" x="49.58" y="85.88" width="8.21" height="1.26" transform="translate(-32.83 140.2) rotate(-90)"/>
+      <rect class="cls-4" x="49.58" y="8.16" width="8.21" height="1.26" transform="translate(44.9 62.47) rotate(-90)"/>
+      <rect class="cls-4" x="49.58" y="8.16" width="8.21" height="1.26" transform="translate(44.9 62.47) rotate(-90)"/>
+      <text class="cls-8" transform="translate(48.86 21.11)"><tspan x="0" y="0">12</tspan></text>
+      <text class="cls-8" transform="translate(51.18 80.12)"><tspan x="0" y="0">6</tspan></text>
+      <text class="cls-8" transform="translate(87.13 51.87)"><tspan x="0" y="0">3</tspan></text>
+      <text class="cls-8" transform="translate(16.35 53.14)"><tspan x="0" y="0">9</tspan></text>
+    </g>
+  </g>
+</svg>

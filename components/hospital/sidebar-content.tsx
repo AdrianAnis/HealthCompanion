@@ -2,9 +2,10 @@
 
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { Activity, LayoutDashboard, LogOut, RotateCcw, Users, type LucideIcon } from "lucide-react"
+import { LayoutDashboard, LogOut, RotateCcw, Users, type LucideIcon } from "lucide-react"
 import { toast } from "sonner"
 
+import { BrandLogo } from "@/components/brand-logo"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { useAuthStore } from "@/features/auth/store"
@@ -47,17 +48,11 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
 
   return (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
-      <div className="flex h-14 items-center gap-2 border-b border-sidebar-border px-4">
-        <span className="flex size-7 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-          <Activity className="size-4" />
-        </span>
-        <div className="leading-tight">
-          <p className="text-sm font-semibold">Health Companion</p>
-          <p className="text-xs text-sidebar-foreground/60">Clinician workspace</p>
-        </div>
+      <div className="flex items-center border-b border-sidebar-border px-5 py-5">
+        <BrandLogo caption="Clinician workspace" className="text-sidebar-foreground" />
       </div>
 
-      <nav aria-label="Navigasi dokter" className="flex flex-1 flex-col gap-0.5 p-2">
+      <nav aria-label="Navigasi dokter" className="flex flex-1 flex-col gap-1 p-3">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const isActive = pathname === href || pathname.startsWith(`${href}/`)
           return (
@@ -67,7 +62,7 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
               onClick={onNavigate}
               aria-current={isActive ? "page" : undefined}
               className={cn(
-                "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
                   ? "bg-sidebar-accent text-sidebar-accent-foreground"
                   : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground",
@@ -80,13 +75,13 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
         })}
       </nav>
 
-      <div className="space-y-2 border-t border-sidebar-border p-3">
-        <Button variant="ghost" size="sm" className="w-full justify-start text-sidebar-foreground/75" onClick={handleResetDemo}>
+      <div className="space-y-3 border-t border-sidebar-border p-4">
+        <Button variant="ghost" className="h-10 w-full justify-start px-3 text-sidebar-foreground/75" onClick={handleResetDemo}>
           <RotateCcw />
           Reset demo
         </Button>
-        <div className="flex items-center gap-2.5">
-          <Avatar className="size-8">
+        <div className="flex items-center gap-3 px-1">
+          <Avatar className="size-9">
             <AvatarFallback className="bg-sidebar-accent text-xs text-sidebar-accent-foreground">
               {doctor ? getInitials(doctor.name) : ""}
             </AvatarFallback>

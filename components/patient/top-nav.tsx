@@ -2,8 +2,9 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronDown, HeartHandshake, LogOut, UserRound } from "lucide-react"
+import { ChevronDown, LogOut, UserRound } from "lucide-react"
 
+import { BrandLogo } from "@/components/brand-logo"
 import { PATIENT_NAV_ITEMS } from "@/components/patient/nav-items"
 import { RingOrnament } from "@/components/ring-ornament"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -28,11 +29,8 @@ export function TopNav() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 hidden h-16 border-b bg-card/95 backdrop-blur md:block">
       <nav aria-label="Navigasi utama" className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-8">
-        <Link href={routes.patient.today} className="flex items-center gap-2 font-semibold text-primary">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <HeartHandshake className="size-5" />
-          </span>
-          Health Companion
+        <Link href={routes.patient.today} aria-label="SehatIn">
+          <BrandLogo />
         </Link>
 
         <ul className="flex h-full items-center gap-1">

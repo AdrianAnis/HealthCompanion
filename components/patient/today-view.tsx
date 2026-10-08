@@ -3,25 +3,28 @@
 import { Suspense } from "react"
 import { ClipboardX } from "lucide-react"
 
-import { CompanionPromptCard } from "@/components/patient/companion-prompt-card"
 import { DietGuideCard } from "@/components/patient/diet-guide-card"
 import { CarePlanItemDialog } from "@/components/patient/care-plan-item-dialog"
 import { EmptyState } from "@/components/patient/empty-state"
 import { FollowUpCard } from "@/components/patient/follow-up-card"
+import { PetCard } from "@/components/patient/pet-card"
 import { NextReminderCard } from "@/components/patient/next-reminder-card"
 import { PageSkeleton } from "@/components/patient/page-skeleton"
 import { ReportPromptLink } from "@/components/patient/report-prompt-link"
 import { PlanUpdateBanner } from "@/components/patient/plan-update-banner"
 import { ReminderTimeline } from "@/components/patient/reminder-timeline"
 import { TodayHeader } from "@/components/patient/today-header"
-import { selectItemsByKind, selectNextFollowUp } from "@/features/care-plan/selectors"
+import { selectItemsByKind, selectNextFollowUp, selectPatientPlans } from "@/features/care-plan/selectors"
+import { useCarePlanStore } from "@/features/care-plan/store"
 import { useFeedbackStore } from "@/features/feedback/store"
+import { selectAchievements, selectCompleteDayStreak, selectConsistencyLevel, selectPetMood } from "@/features/pet/selectors"
 import { selectFirstName, selectHonorific } from "@/features/patient/selectors"
 import { usePatientContext } from "@/features/patient/use-patient-context"
 import {
   getTodayReminders,
   selectDailyProgress,
   selectNextReminder,
+  selectAdherenceByDay,
   selectReminderViews,
 } from "@/features/reminder/selectors"
 import { toDateKey } from "@/lib/date"
@@ -29,6 +32,7 @@ import { useNow } from "@/lib/use-now"
 
 export function TodayView() {
   const { isHydrated, patient, activePlan, activeDoctor } = usePatientContext()
+  const plans = useCarePlanStore((state) => state.plans)
   const completions = useFeedbackStore((state) => state.completions)
   const toggleCompletion = useFeedbackStore((state) => state.toggleCompletion)
   const now = useNow()
@@ -37,6 +41,7 @@ export function TodayView() {
 
   const reminders = selectReminderViews(getTodayReminders(activePlan, now), completions, now)
   const progress = selectDailyProgress(reminders)
+  const adherenceDays = selectAdherenceByDay(selectPatientPlans(plans, patient.id), completions, now)
 
   return (
     <div className="space-y-6">
@@ -58,7 +63,12 @@ export function TodayView() {
             </section>
           </div>
           <aside className="min-w-0 space-y-6 lg:col-span-5 xl:col-span-4">
-            <CompanionPromptCard />
+            <PetCard
+              mood={selectPetMood(progress, now)}
+              level={selectConsistencyLevel(adherenceDays)}
+              streak={selectCompleteDayStreak(adherenceDays)}
+              achievements={selectAchievements(adherenceDays)}
+            />
             <DietGuideCard items={selectItemsByKind(activePlan, "diet")} />
             <FollowUpCard followUp={selectNextFollowUp(activePlan, toDateKey(now))} doctor={activeDoctor} now={now} />
             <ReportPromptLink />
