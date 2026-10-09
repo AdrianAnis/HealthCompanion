@@ -2,12 +2,13 @@
 
 import { Suspense } from "react"
 import Link from "next/link"
-import { ChevronRight, ClipboardX } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
 import { CARE_PLAN_KIND_ICON } from "@/components/care-plan-kind-icons"
 import { CarePlanItemDialog } from "@/components/patient/care-plan-item-dialog"
 import { EmptyState } from "@/components/patient/empty-state"
 import { PageSkeleton } from "@/components/patient/page-skeleton"
+import { PeekingPet } from "@/components/patient/peeking-pet"
 import { PlanUpdateBanner } from "@/components/patient/plan-update-banner"
 import { RingOrnament } from "@/components/ring-ornament"
 import { Badge } from "@/components/ui/badge"
@@ -27,7 +28,6 @@ export function CarePlanView() {
   if (!activePlan) {
     return (
       <EmptyState
-        icon={ClipboardX}
         title="Belum ada care plan aktif"
         description="Care plan akan muncul di sini setelah dokter mengonfirmasinya."
       />
@@ -45,6 +45,7 @@ export function CarePlanView() {
 
       <section className="relative grid gap-5 overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground sm:grid-cols-3 md:p-8">
         <RingOrnament />
+        <PeekingPet />
         <PlanFact label="Dokter">
           <p className="font-medium">{activeDoctor?.name ?? "-"}</p>
           {activeDoctor ? <p className="text-sm text-primary-foreground/80">{activeDoctor.hospital}</p> : null}

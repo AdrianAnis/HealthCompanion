@@ -1,41 +1,29 @@
 import { CalendarDays } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import { InteractivePetFace } from "@/components/patient/interactive-pet-face"
+import type { PetKind } from "@/features/pet/types"
 import { formatDate, getGreeting } from "@/lib/date"
 
 type TodayHeaderProps = {
   now: Date
   honorific: string
   firstName: string
-  done: number
-  total: number
+  petKind: PetKind
 }
 
-export function TodayHeader({ now, honorific, firstName, done, total }: TodayHeaderProps) {
+export function TodayHeader({ now, honorific, firstName, petKind }: TodayHeaderProps) {
   return (
-    <header className="space-y-3">
-      <p className="flex items-center gap-2 type-overline">
-        <CalendarDays className="size-4" />
-        {formatDate(now, "EEEE, d MMMM yyyy")}
-      </p>
-      <h1 className="type-title">
-        {getGreeting(now)}, {honorific} {firstName}
-      </h1>
-      {total > 0 ? (
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1" aria-hidden="true">
-            {Array.from({ length: total }, (_, index) => (
-              <span key={index} className={cn("size-3 rounded-full", index < done ? "bg-success" : "bg-border")} />
-            ))}
-          </div>
-          <p className="type-caption">
-            <strong className="text-foreground">
-              {done} dari {total} jadwal
-            </strong>{" "}
-            hari ini sudah kamu tandai
-          </p>
-        </div>
-      ) : null}
+    <header className="flex items-center justify-between gap-4">
+      <div className="min-w-0 space-y-3">
+        <p className="flex items-center gap-2 type-overline">
+          <CalendarDays className="size-4" />
+          {formatDate(now, "EEEE, d MMMM yyyy")}
+        </p>
+        <h1 className="type-title">
+          {getGreeting(now)}, {honorific} {firstName}
+        </h1>
+      </div>
+      <InteractivePetFace kind={petKind} />
     </header>
   )
 }

@@ -1,16 +1,19 @@
 import { CheckCircle2, Clock } from "lucide-react"
 
+import { RunningPet } from "@/components/patient/running-pet"
 import { RingOrnament } from "@/components/ring-ornament"
 import { Button } from "@/components/ui/button"
+import type { PetKind } from "@/features/pet/types"
 import type { ReminderView } from "@/features/reminder/selectors"
 
 type NextReminderCardProps = {
   reminder: ReminderView | undefined
   total: number
+  petKind: PetKind
   onToggle: (key: string) => void
 }
 
-export function NextReminderCard({ reminder, total, onToggle }: NextReminderCardProps) {
+export function NextReminderCard({ reminder, total, petKind, onToggle }: NextReminderCardProps) {
   if (!reminder) {
     return (
       <section className="rounded-3xl border bg-card p-6 shadow-sm md:p-8">
@@ -34,6 +37,12 @@ export function NextReminderCard({ reminder, total, onToggle }: NextReminderCard
   return (
     <section className="relative overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground md:p-8">
       <RingOrnament />
+      <div className="pointer-events-none absolute top-4 right-4 size-28 md:top-6 md:right-8 md:size-40" aria-hidden="true">
+        <span className="absolute inset-0 rounded-full bg-primary-foreground/20" />
+        <div className="absolute inset-0 overflow-hidden rounded-full">
+          <RunningPet kind={petKind} />
+        </div>
+      </div>
       <div className="relative flex flex-wrap items-center gap-3 text-sm font-medium">
         <span className="rounded-full bg-primary-foreground px-3 py-0.5 text-xs font-semibold text-primary">
           {isOverdue ? "Terlewat" : "Berikutnya"}
@@ -43,8 +52,8 @@ export function NextReminderCard({ reminder, total, onToggle }: NextReminderCard
           {reminder.time ?? "Kapan saja hari ini"}
         </span>
       </div>
-      <h2 className="relative mt-3 type-title text-primary-foreground">{reminder.title}</h2>
-      <p className="relative mt-1 text-primary-foreground/80">{reminder.detail}</p>
+      <h2 className="relative mt-3 pr-28 type-title text-primary-foreground md:pr-44">{reminder.title}</h2>
+      <p className="relative mt-1 pr-28 text-primary-foreground/80 md:pr-44">{reminder.detail}</p>
       <Button
         size="lg"
         className="relative mt-6 h-12 w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 sm:w-auto sm:min-w-56"

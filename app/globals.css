@@ -126,6 +126,414 @@
   }
 }
 
+@keyframes pet-run {
+  0% {
+    transform: translateX(130%);
+  }
+  35%, 65% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-130%);
+  }
+}
+
+@keyframes pet-frame-a {
+  0% {
+    opacity: 1;
+  }
+  2.5% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  7.5% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  12.5% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  17.5% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  22.5% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  27.5% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  32.5% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  37.5% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  42.5% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  47.5% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  52.5% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  57.5% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  62.5% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  67.5% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  72.5% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  77.5% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+  82.5% {
+    opacity: 0;
+  }
+  85% {
+    opacity: 1;
+  }
+  87.5% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 1;
+  }
+  92.5% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 1;
+  }
+  97.5% {
+    opacity: 0;
+  }
+}
+
+@keyframes pet-frame-b {
+  0% {
+    opacity: 0;
+  }
+  2.5% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0;
+  }
+  7.5% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  12.5% {
+    opacity: 1;
+  }
+  15% {
+    opacity: 0;
+  }
+  17.5% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  22.5% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  27.5% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  32.5% {
+    opacity: 1;
+  }
+  35% {
+    opacity: 0;
+  }
+  37.5% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  42.5% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0;
+  }
+  47.5% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  52.5% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 0;
+  }
+  57.5% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  62.5% {
+    opacity: 0;
+  }
+  65% {
+    opacity: 0;
+  }
+  67.5% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+  72.5% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  77.5% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  82.5% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+  87.5% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+  92.5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+  97.5% {
+    opacity: 1;
+  }
+}
+
+@keyframes pet-gait {
+  0% {
+    transform: translateY(0px);
+  }
+  2.5% {
+    transform: translateY(-4px);
+  }
+  5% {
+    transform: translateY(0px);
+  }
+  7.5% {
+    transform: translateY(-4px);
+  }
+  10% {
+    transform: translateY(0px);
+  }
+  12.5% {
+    transform: translateY(-4px);
+  }
+  15% {
+    transform: translateY(0px);
+  }
+  17.5% {
+    transform: translateY(-4px);
+  }
+  20% {
+    transform: translateY(0px);
+  }
+  22.5% {
+    transform: translateY(-4px);
+  }
+  25% {
+    transform: translateY(0px);
+  }
+  27.5% {
+    transform: translateY(-4px);
+  }
+  30% {
+    transform: translateY(0px);
+  }
+  32.5% {
+    transform: translateY(-4px);
+  }
+  35% {
+    transform: translateY(0px);
+  }
+  37.5% {
+    transform: translateY(0px);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  42.5% {
+    transform: translateY(0px);
+  }
+  45% {
+    transform: translateY(0px);
+  }
+  47.5% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  52.5% {
+    transform: translateY(0px);
+  }
+  55% {
+    transform: translateY(0px);
+  }
+  57.5% {
+    transform: translateY(0px);
+  }
+  60% {
+    transform: translateY(0px);
+  }
+  62.5% {
+    transform: translateY(0px);
+  }
+  65% {
+    transform: translateY(0px);
+  }
+  67.5% {
+    transform: translateY(-4px);
+  }
+  70% {
+    transform: translateY(0px);
+  }
+  72.5% {
+    transform: translateY(-4px);
+  }
+  75% {
+    transform: translateY(0px);
+  }
+  77.5% {
+    transform: translateY(-4px);
+  }
+  80% {
+    transform: translateY(0px);
+  }
+  82.5% {
+    transform: translateY(-4px);
+  }
+  85% {
+    transform: translateY(0px);
+  }
+  87.5% {
+    transform: translateY(-4px);
+  }
+  90% {
+    transform: translateY(0px);
+  }
+  92.5% {
+    transform: translateY(-4px);
+  }
+  95% {
+    transform: translateY(0px);
+  }
+  97.5% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pet-peek-edge {
+  0%, 8%, 88%, 100% {
+    transform: translateY(105%);
+  }
+  22%, 30% {
+    transform: translateY(12%);
+  }
+  36%, 74% {
+    transform: translateY(32%);
+  }
+  80% {
+    transform: translateY(40%);
+  }
+}
+
+@keyframes pet-sway {
+  0%, 100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-2px);
+  }
+}
+
 @keyframes pet-pop-in {
   0% {
     opacity: 0;
@@ -189,6 +597,32 @@
   animation: pet-heart 3s ease-out infinite;
 }
 
+.pet-run {
+  animation: pet-run 8s linear infinite;
+}
+
+.pet-frame-a {
+  animation: pet-frame-a 8s step-end infinite;
+}
+
+.pet-frame-b {
+  opacity: 0;
+  animation: pet-frame-b 8s step-end infinite;
+}
+
+.pet-gait {
+  animation: pet-gait 8s linear infinite;
+}
+
+.pet-peek-edge {
+  transform: translateY(32%);
+  animation: pet-peek-edge 7s ease-in-out infinite;
+}
+
+.pet-sway {
+  animation: pet-sway 2.4s ease-in-out infinite;
+}
+
 .pet-pop-in {
   animation: pet-pop-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
@@ -214,6 +648,12 @@
   .pet-float,
   .pet-tail,
   .pet-wave,
+  .pet-run,
+  .pet-peek-edge,
+  .pet-frame-a,
+  .pet-frame-b,
+  .pet-gait,
+  .pet-sway,
   .pet-paw,
   .pet-fly,
   .pet-heart,
