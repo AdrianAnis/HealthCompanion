@@ -1,9 +1,11 @@
 import { BookOpenCheck, Flag } from "lucide-react"
 
 import { EscalationCard } from "@/components/patient/escalation-card"
+import { PetFace } from "@/components/patient/pet-face"
 import { Button } from "@/components/ui/button"
 import type { ChatMessage } from "@/features/companion/types"
 import type { Doctor } from "@/features/patient/types"
+import { usePetStore } from "@/features/pet/store"
 import { formatDate } from "@/lib/date"
 import { cn } from "@/lib/utils"
 
@@ -19,18 +21,22 @@ function getDoctorShortName(doctors: Doctor[], doctorId: string): string {
 }
 
 export function ChatBubble({ message, doctors, onReport }: ChatBubbleProps) {
+  const petKind = usePetStore((state) => state.kind)
   const isPatient = message.role === "patient"
   const escalationScope = !isPatient && message.scope !== "in-scope" ? message.scope : null
 
   return (
     <div className={cn("flex flex-col gap-2", isPatient ? "items-end" : "items-start")}>
-      <div
-        className={cn(
-          "max-w-xs sm:max-w-md rounded-2xl px-4 py-3 whitespace-pre-line",
-          isPatient ? "rounded-br-md bg-primary text-primary-foreground" : "rounded-bl-md border bg-card",
-        )}
-      >
-        {message.content}
+      <div className="flex items-end gap-2">
+        {isPatient ? null : <PetFace kind={petKind} className="size-9" />}
+        <div
+          className={cn(
+            "max-w-xs sm:max-w-md rounded-2xl px-4 py-3 whitespace-pre-line",
+            isPatient ? "rounded-br-md bg-primary text-primary-foreground" : "rounded-bl-md border bg-card",
+          )}
+        >
+          {message.content}
+        </div>
       </div>
 
       {message.source ? (

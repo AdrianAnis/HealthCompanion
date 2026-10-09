@@ -1,16 +1,15 @@
-import type { LucideIcon } from "lucide-react"
+import Image from "next/image"
 
 type EmptyStateProps = {
-  icon: LucideIcon
   title: string
   description: string
 }
 
-export function EmptyState({ icon: Icon, title, description }: EmptyStateProps) {
+export function EmptyState({ title, description }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center rounded-3xl border border-dashed bg-card p-10 text-center">
-      <span className="flex size-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
-        <Icon className="size-7" />
+      <span className="flex size-24 items-center justify-center rounded-full bg-primary">
+        <Image src="/grafis/robot-companion.svg" alt="" width={64} height={64} unoptimized className="pet-float size-16 object-contain" />
       </span>
       <h2 className="mt-4 type-heading">{title}</h2>
       <p className="mt-1 max-w-sm text-muted-foreground">{description}</p>
